@@ -19,7 +19,7 @@ if (isset($_POST["Appointment_Id"])) {
             $ntime = date("h:i A", strtotime($row["Time"]." + 18 hours"));
             $ytime = date("h:i A", strtotime($row["Time"]." + ".$row["Duration"]));
             $etime = date("h:i A", strtotime($ytime." + 18 hours"));
-          header('Location: /appointment%20system/quickstart.php?Name='.$row["Patient_Id"].'&Service='.$row["Service"].'&STime='.$ntime.'&ETime='.$etime.'&Date='.$row["Date"].'&Branch='.$row["Branch"].'');
+          header('Location: /quickstart.php?Name='.$row["Patient_Id"].'&Service='.$row["Service"].'&STime='.$ntime.'&ETime='.$etime.'&Date='.$row["Date"].'&Branch='.$row["Branch"].'');
         }
         exit();
         }else{

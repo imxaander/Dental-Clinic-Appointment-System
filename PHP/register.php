@@ -124,7 +124,7 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
             if ($result)
             {
 
-                $url = "http://99cd-136-158-33-250.ap.ngrok.io/appointment%20system/PHP/verify.php?vcode=" . $vcode;
+                $url = "http://jgonzalesappointmentsystem.herokuapp.com/PHP/verify.php?vcode=" . $vcode;
 
                 $subject = 'Verify your account for J. Gonzales Clinic';
 
