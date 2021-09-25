@@ -1,0 +1,573 @@
+@media all and (min-width: 700px){
+    body,html{
+        margin: 0;
+        padding:0;
+    }
+    body{
+        font-family: 'News Cycle';
+        background-image: url('https://cdn.discordapp.com/attachments/881553422946537513/881554158770069605/unknown.png');
+        background-repeat: no-repeat;
+        background-size: 100%;
+    }
+    .logo{
+      font-family: 'Clicker Script';
+      text-align:  center;
+      margin: 0;
+      padding: 0;
+      background-color: #00b4d8;
+
+    }
+    .logo h1{
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    #head-icon{
+        width: 100%;
+    }
+    #top-bar{
+        position: sticky;
+        position: -webkit-sticky;
+        top : 0px;
+        background-color: #00b4d8;
+        color: #caf0f8;
+
+    }
+    #top-bar p{
+        font-size: 30px;
+        margin: 0;
+        text-align: center;
+        padding: 10px;
+    }
+    #menu-btn{
+        font-size:  40px;
+        padding-left:5px ;
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+    }
+    #user-pic-bar{
+        font-size:  40px;
+        padding-right:5px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        float: right;
+    }
+    #side-bar {
+        width: 0%;
+        height: 100%;
+        position : fixed;
+        left: 0%;
+        top: 0%;
+        background-color: white;
+        overflow: auto;
+        transition: width .5s;
+        z-index: 3;
+
+    }
+    .tablinks{
+
+
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+        display: block;
+        width: 100%;
+        text-indent: 7px;
+        color:#00b4d8;
+
+
+
+    }
+    #side-bar-head{
+        height: 120px;
+        width: 100%;
+        background-color: #00b4d8;
+
+    }
+
+    #Services , #Doctors , #Gallery, #Contact_Us{
+        display: none;
+    }
+    #profile-picture{
+        border-radius: 50%;
+        width : 100px;
+        height : 100px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+
+
+    }
+    #darken{
+        background-color: rgba(0,0,0,0.5);
+
+        position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:2;
+    display: none;
+
+    }
+    #profile{
+        margin: auto;
+        height: auto;
+        position: absolute;
+    }
+        #profile-name{
+        font-size: 20px;
+        position: relative;
+        margin: 0;
+        top: 50px;
+        margin-left: 120px;
+        color: #caf0f8;
+    }
+    .tabcontent{
+        text-indent: 5px;
+    }
+    .tabcontent h4{
+        margin: 0;
+    }
+    #Home{
+        background-image: url('');
+
+        height: 100%;
+        background-repeat: no-repeat;
+    }
+    .no-acc{
+        font-size: 20px;
+        position: relative;
+        margin: 0;
+
+        margin-left: 35%;
+        color: #caf0f8;
+    }
+    #login-form{
+        width: 400px; 
+        height: auto;
+        position: relative;
+        left: 40%;
+        background: white;
+        padding-top: 0;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+        border-radius: 25px;
+        text-indent: 5%;
+        color: #00b4d8;
+
+
+    }
+    #register-form{
+        display: grid;
+        grid-template-areas:
+        'registerheader registerheader registerheader registerheader'
+        'email email password password'
+        'firstname firstname middlename lastname'
+        'age address birthdate gender'
+        'occupation branch civilstatus contactno'
+        'image image image image'
+        'submitbtn submitbtn submitbtn submitbtn'
+        ;
+        height: auto;
+        position: relative;
+        width: 60%;
+        left: 20%;
+        background: white;
+        padding-top: 0;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+        border-radius: 25px;
+        text-indent: 5%;
+        color: #00b4d8;
+        padding : 10px;
+    }
+    .login_text{
+        grid-area: registerheader;
+        padding: 0px;
+    }
+    .input-header{
+        
+    }
+    .input-email{
+        grid-area: email;
+        padding-left: 10px;
+    }
+    .input-password{
+        grid-area: password;
+        padding-left: 10px;
+    }
+    .input-firstname{
+        grid-area: firstname;
+        padding-left: 10px;
+    }
+    .input-middlename{
+        grid-area: middlename;
+        padding-left: 10px;
+    }
+    .input-lastname{
+        grid-area: lastname;
+        padding-left: 10px;
+    }
+    .input-age{
+        grid-area: age;
+        padding-left: 10px;
+    }
+    .input-address{
+        grid-area: address;
+        padding-left: 10px;
+    }
+    .input-birthdate{
+        grid-area: birthdate;
+        padding-left: 10px;
+    }
+    .input-gender{
+        grid-area: gender;
+        padding-left: 10px;
+    }
+    .input-occupation{
+        grid-area: occupation;
+        padding-left: 10px;
+    }
+    .input-branch{
+        grid-area: branch;
+        padding-left: 10px;
+    }
+    .input-civilstatus{
+        grid-area: civilstatus;
+        padding-left: 10px;
+    }
+    .input-contactno{
+        grid-area: contactno;
+        padding-left: 10px;
+    }
+    .input-image{
+        grid-area: image;
+        padding-left: 10px;
+    }
+    .input-submitbtn{
+        grid-area: submitbtn;
+        padding-left: 10px;
+    }
+    .login_text{
+        text-align: center;
+        background-color: #00b4d8;
+        color: white;
+        position: relative;
+        margin: 0%;
+        text-indent: 0;
+        font-size: 30px;
+        padding: 0%;
+        border-radius: 25px;
+        border-bottom-left-radius: 0%;
+        border-bottom-right-radius: 0%;
+
+    }
+    .input-boxes{
+        border: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        height: 25px;
+        font-family: tahoma;
+        border-color: #00b4d8;
+        width: 90%;
+    }
+    .submits{
+        border: solid;
+    height: 25px;
+    border-color: black;
+    color: white;
+    font-family: quicksand;
+    background-color:#BFD0CA;
+    border: none;
+    background-color: #00b4d8;
+    width: 30%;
+    position: relative;
+    left: 35%;
+    border-radius: 15px;
+    }
+    .error{
+        color: red;
+
+    }
+    .success{
+        color: green;
+    }
+}
+/* for mobile*/
+@media all and (max-width: 699px){
+
+    .login_text{
+        grid-area: registerheader;
+        padding: 0px;
+    }
+    .input-header{
+        
+    }
+    .input-email{
+       
+        padding-left: 10px;
+    }
+    .input-password{
+        
+        padding-left: 10px;
+    }
+    .input-firstname{
+        padding-left: 10px;
+    }
+    .input-middlename{
+        padding-left: 10px;
+    }
+    .input-lastname{
+        padding-left: 10px;
+    }
+    .input-age{
+        padding-left: 10px;
+    }
+    .input-address{
+        padding-left: 10px;
+    }
+    .input-birthdate{
+        padding-left: 10px;
+    }
+    .input-gender{
+        padding-left: 10px;
+    }
+    .input-occupation{
+        padding-left: 10px;
+    }
+    .input-branch{
+        padding-left: 10px;
+    }
+    .input-civilstatus{
+        padding-left: 10px;
+    }
+    .input-contactno{
+        padding-left: 10px;
+    }
+    .input-image{
+        padding-left: 10px;
+    }
+    .input-submitbtn{
+        padding-left: 10px;
+    }
+    #login-form{
+        width: 80%;
+        height: auto;
+        position: relative;
+        left: 10%;
+        background: white;
+        padding-top: 0;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+        border-radius: 25px;
+        text-indent: 5%;
+        color: #00b4d8;
+
+    }
+    #register-form{
+        width: 80%;
+        height: auto;
+        position: relative;
+        left: 10%;
+        background: white;
+        padding-top: 0;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+        border-radius: 25px;
+        text-indent: 5%;
+        color: #00b4d8;
+
+
+    }
+    body,html{
+        margin: 0;
+        padding:0;
+    }
+    body{
+      font-family: 'News Cycle';
+      background-image: url('https://cdn.discordapp.com/attachments/881553422946537513/881563232173719563/unknown.png');
+      background-repeat: no-repeat;
+      background-size: 120%;
+
+    }
+
+    #head-icon{
+        width: 100%;
+    }
+    #top-bar{
+        position: sticky;
+        position: -webkit-sticky;
+        top : 0px;
+        background-color: #00b4d8;
+        color: #caf0f8;
+
+    }
+    #top-bar p{
+        font-size: 30px;
+        margin: 0;
+        text-align: center;
+        padding: 10px;
+    }
+    #menu-btn{
+        font-size:  40px;
+        padding-left:5px ;
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+    }
+    #user-pic-bar{
+        font-size:  40px;
+        padding-right:5px ;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        float: right;
+    }
+    #side-bar {
+        width: 0%;
+        height: 100%;
+        position : fixed;
+        left: 0%;
+        top: 0%;
+        background-color: white;
+        overflow: auto;
+        transition: width .5s;
+        z-index: 3;
+
+    }
+    .tablinks{
+
+
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+        display: block;
+        width: 100%;
+        text-indent: 7px;
+        color:#00b4d8;
+
+
+
+    }
+    #side-bar-head{
+        height: 120px;
+        width: 100%;
+        background-color: #00b4d8;
+
+    }
+
+    #Services , #Doctors , #Gallery, #Contact_Us{
+        display: none;
+    }
+    #profile-picture{
+        border-radius: 50%;
+        width : 100px;
+        height : 100px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+
+
+    }
+    #darken{
+        background-color: rgba(0,0,0,0.5);
+
+        position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:2;
+    display: none;
+
+    }
+    #profile{
+        margin: auto;
+        height: auto;
+        position: absolute;
+    }
+        #profile-name{
+        font-size: 20px;
+        position: relative;
+        margin: 0;
+        top: 50px;
+        margin-left: 120px;
+        color: #caf0f8;
+    }
+    .tabcontent{
+        text-indent: 5px;
+    }
+    .tabcontent h4{
+        margin: 0;
+    }
+    #Home{
+        background-image: url('');
+        height: 100%;
+        background-repeat: no-repeat;
+    }
+    .no-acc{
+        font-size: 20px;
+        position: relative;
+        margin: 0;
+
+        margin-left: 35%;
+        color: #caf0f8;
+    }
+    
+    .login_text{
+        text-align: center;
+        background-color: #00b4d8;
+        color: white;
+        position: relative;
+        margin: 0%;
+        text-indent: 0;
+        font-size: 30px;
+        padding: 0%;
+        border-radius: 25px;
+        border-bottom-left-radius: 0%;
+        border-bottom-right-radius: 0%;
+
+    }
+    .input-boxes{
+        border: solid;
+        border-width: 1px;
+        border-radius: 10px;
+        height: 25px;
+        font-family: 'News Cycle';
+        size: 90;
+        border-color: #00b4d8;
+    }
+    .logo{
+      font-family: 'Clicker Script';
+      text-align:  center;
+      margin: 0;
+      padding: 0;
+      background-color: #00b4d8;
+
+    }
+    .logo h1{
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    .submits{
+        border: solid;
+    height: 25px;
+    border-color: black;
+    color: white;
+    font-family: 'News Cycle';
+    background-color:#BFD0CA;
+    border: none;
+    background-color: #00b4d8;
+    width: 30%;
+    position: relative;
+    left: 35%;
+    border-radius: 15px;
+    }
+    .error{
+        color: red;
+
+    }
+    .success{
+        color: green;
+    }
+}

@@ -1,0 +1,650 @@
+/*@media all and (min-width: 430px){
+  .topbarmobile{
+    display: none;
+  }
+  .topbarpc{
+    display: block;
+  }
+}*/
+#Staff_Panel, #UserPanel, #StaffAccount{
+  display: none;
+}
+#patient_panel_table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+#patient_panel_table td, #patient_panel_table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#patient_panel_table tr:nth-child(even){background-color: #f2f2f2;}
+
+#patient_panel_table tr:hover {background-color: #ddd;}
+
+#patient_panel_table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color:  #00b4d8;
+  color: white;
+}
+
+.awards p{
+  grid-area: awards;
+  background-color: white;
+}
+.services{
+  border: hidden;
+  width: 93%;
+  border-radius: 25px;
+  height: 300px;
+background
+box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+transition: display 0.3s;
+margin-bottom: 10px;
+background-size: cover;
+position: relative;
+text-align: center;
+cursor: pointer;
+
+}
+.services:hover{
+  bottom : 10px;
+  left: 10px;
+  position: relative;
+  box-shadow: 0 25px 25px 25px rgba(0, 0, 0, 0.25);
+
+}
+
+html {
+  scroll-behavior: smooth;
+}
+#home{
+  background-color: 	#71c7ec;
+  background-size: cover;
+  padding-top: 20px;
+}
+
+.home-content-pic img{
+  width: 95%;
+}
+.insert-slides-btn{
+  display:none;
+}
+#dateinput{
+  display: none;
+}
+@media all and (min-width: 741px){
+  .AppInfo{
+    height: 100%;
+  }
+  .AppPanel{
+    height: 100%;
+    overflow-y: scroll;
+  }
+  #AppPanel{
+    display : grid ;
+    grid-template-columns: repeat(2, 1fr);
+    height: 80%;
+  }
+  .AppInfoAll{
+    height: 100%;
+  }
+  .AppPanelAll{
+    height: 100%;
+    overflow-y: scroll;
+  }
+  #AppPanel{
+    display : grid ;
+    grid-template-columns: repeat(2, 1fr);
+    height: 80%;
+  }
+  .appointment-info{
+    height: 100%;
+  }
+  .appointment-listing{
+    height: 100%;
+    overflow-y: scroll;
+  }
+  .appointment_list{
+    display : grid ;
+    grid-template-columns: repeat(2, 1fr);
+    height: 80%;
+  }
+  .carousel{
+    height: 70%;
+    width: 70%;
+    position: relative;
+    left: 15%;
+  }
+  .carousel-item img{
+    height: 100%;
+  }
+  .services-big{
+    position: fixed;
+    top: 10%;
+    width: 80%;
+    height: 80%;
+    left:10%;
+    background-color: white;
+    z-index: 4;
+    border-radius: 25px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+    display: none;
+    overflow-y: auto;
+  }
+  #Services{
+
+  display:  grid;
+  /*grid-template-columns: auto auto auto auto auto ;*/
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+  margin-right: 50px;
+  margin-left:  50px;
+  }
+  .services{
+color : black;
+    width: 100%;
+
+    height: 300px;
+    margin: 5px;
+
+
+
+  }
+.home-content { grid-area: main; }
+.fb-page-div { grid-area: right; }
+.awards {
+  grid-area: awards;
+  background-color: white;
+}
+
+.info { grid-area: info; }
+
+.home-content{
+  padding-bottom: 10px;
+}
+.logo-div{
+  grid-area: logo;
+
+}
+.acc-div{
+  grid-area: account;
+  float: right;
+}
+.top-logo-pc{
+  display: grid;
+  grid-template-areas:
+  'logo logo logo logo account';
+}
+#Home{
+  display: grid;
+    grid-template-areas:
+      'main main main right'
+      'main main main right'
+      'awards awards awards awards'
+      'info info info info';
+      grid-gap: 10px;
+}
+
+  .topbarmobile{
+    display: none;
+  }
+  .fb-page-div{
+
+
+
+  }
+  .home-content{
+
+  }
+  .fb_iframe_widget span{
+
+  }
+
+  .topbarpc{
+    display: block;
+    position: sticky;
+    position: -webkit-sticky;
+    top : 0px;
+    z-index: 2;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  }
+  .top-logo-pc{
+
+  }
+    body,html{
+        margin: 0;
+        padding:0;
+    }
+    body{
+        font-family: 'News Cycle';
+    }
+
+    #head-icon{
+
+      display: block;
+margin-left: auto;
+margin-right: auto;
+height: 10%;
+    }
+  }
+
+    #top-bar-pc{
+      position: sticky;
+      position: -webkit-sticky;
+      top : 0;
+      background-color: #00b4d8;
+      color: #caf0f8;
+      z-index: 2;
+      padding: 20px;
+    }
+    #top-bar p{
+        font-size: 1rem;
+        margin: 0;
+
+    }
+    #menu-btn{
+        font-size:  40px;
+        padding-left:5px ;
+        padding-bottom: 5px;
+        padding-top: 5px;
+
+    }
+    #user-pic-bar{
+        font-size:  40px;
+        padding-right:5px ;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        float: right;
+    }
+    #side-bar {
+        width: 0%;
+        height: 100%;
+        position : fixed;
+        left: 0%;
+        top: 0%;
+        background-color: white;
+        overflow: auto;
+        transition: width .5s;
+        z-index: 5;
+
+    }
+    .tablinks{
+
+
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+        display: block;
+        width: 100%;
+        text-indent: 7px;
+        color:#00b4d8;
+
+
+
+    }
+    .tablinkspc{
+
+
+        text-decoration: none;
+        color: white;
+        font-size: 20px;
+
+        width: 100%;
+        text-indent: 7px;
+
+
+
+
+
+
+    }
+
+    #side-bar-head{
+        height: 120px;
+        width: 100%;
+        background-color: #00b4d8;
+
+    }
+
+    #Services , #Doctors , #Gallery, #Contact_Us, #Appointments, #Admin_Panel, #Profile_Page{
+        display: none;
+    }
+
+    .topbarpc a{
+      transition: 0.3s;
+    }
+    /*
+    .tablinkspc:hover{
+      background-color: #3C99DC;
+      color: white;
+      padding: 10px;
+    }
+    .tablinkspc.active{
+      background-color: #3C99DC;
+      color: white;
+      padding: 10px;
+    }
+    */
+    .topbarpc a:hover{
+      background-color: #3C99DC;
+      color: white;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+    .tablinkspc.selected{
+      background-color: #3C99DC;
+      color: white;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    #profile-picture{
+        border-radius: 50%;
+        width : 100px;
+        height : 100px;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+
+
+    }
+    #darken{
+        background-color: rgba(0,0,0,0.5);
+
+        position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:4;
+    display: none;
+
+    }
+    #darkenSvc{
+        background-color: rgba(0,0,0,0.5);
+
+        position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:4;
+    display: none;
+
+    }
+    #profile{
+        margin: auto;
+        height: auto;
+        position: absolute;
+    }
+        #profile-name{
+        font-size: 20px;
+        position: relative;
+        margin: 0;
+        top: 50px;
+        margin-left: 120px;
+        color: #caf0f8;
+    }
+    .tabcontent{
+        text-indent: 5px;
+    }
+    .tabcontent h4{
+        margin: 0;
+    }
+
+    .no-acc{
+        font-size: 20px;
+        position: relative;
+        margin: 0;
+        margin-left: 35%;
+        color: #caf0f8;
+    }
+
+    #app-btn{
+        border-color: #00b4d8;
+        border-style: solid;
+
+    }
+    #appbtn p{
+        text-align: center;
+    }
+    #appointment-table tr,th{
+        border: 1px solid black;
+    }
+
+    /* appointment form */
+    #appinsert #appformheader{
+      background-color: #00b4d8;
+      position: relative;
+      width: 100%;
+      border-top-left-radius:  25px;
+      border-top-right-radius:  25px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+
+    }
+    #appformheadertext{
+    font-size: 25px;
+    color: white;
+    padding: 0;
+    margin: 0;
+    }
+
+    #appinsert p{
+
+    }
+    #appinsert{
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+        background-color: white;
+        z-index: 5;
+        border-radius: 25px;
+        width: 80%;
+        left: 10%;
+        position: fixed;
+        top: 10%;
+        margin: 0;
+        padding: 0;
+        overflow-y: scroll;
+        display: none;
+        /*width: 80%;
+        position: fixed;
+        z-index: 3;
+        left: 20%;
+        display: block;*/
+    }
+    .collapsible {
+        background-color: #0077b6;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        margin-bottom: 10px;
+        width: 90%;
+        position: relative;
+        margin-left: 5%;
+        z-index: 1;
+
+
+      }
+
+      .content {
+
+        display: none;
+        overflow: hidden;
+        background-color: #f1f1f1;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        width: 90%;
+
+
+
+margin-left: 5%;
+      }
+      #appinsert-btn{
+        font-size:  40px;
+        padding-right:5px ;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        float: right;
+
+      }
+      #appinsertbtnpc{
+        float: right;
+
+      }
+
+      #closappinsertbtn{
+        font-size:  30px;
+        padding-right: 10px ;
+        padding-bottom: 10px;
+        float: right;
+        position: relative;
+        color: white;
+        
+      }
+      #UserPanel{
+        display: hidden;
+      }
+      #AppPanel{
+        display: hidden;
+      }
+      .Staff_Btn{
+        background-color: #00b4d8;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 33%;
+        text-align: center;
+        border: none;
+
+        outline: none;
+        font-size: 15px;
+        transition: 0.3s;
+      }
+      .Staff_Btn:hover{
+        background-color: black;
+      }
+      .logo{
+        font-family: 'Clicker Script';
+        text-align:  center;
+        margin: 0;
+        padding: 0;
+        background-color: #00b4d8;
+
+      }
+      .logo h1{
+        margin: 0;
+        padding: 0;
+        color: white;
+      }
+      .Status_Btn{
+        text-decoration: none;
+        color: white;
+
+
+        padding: 5px;
+        border-radius: 10px;
+      }
+      #message_container{
+        width: 90%;
+        height: 90%;
+        position: fixed;
+        left: 5%;
+        top: 5%;
+        z-index: 6;
+        background-color: white;
+        display: none;
+        text-indent: 20px;
+        border-top-left-radius: 25px;
+        border-top-right-radius: 25px;
+      }
+      #message_history{
+        height: 80%;
+        position: relative;
+        background-color: white;
+         overflow-x: hidden;
+
+      }
+      #openmessagesbtn{
+        font-size: 40px;
+        background-color: #00b4d8;
+        padding: 10px;
+        border-radius: 57%;
+        color: white;
+        margin: 0;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+        position: fixed;
+        bottom: 10%;
+        z-index: 3;
+        right: 5%;
+      }
+      #closemessagesbtn{
+        font-size: 30px;
+        padding-right: 10px;
+        color: white;
+      }
+      #message_content{
+        width: 70%;
+        border-radius: 5px;
+        padding: 0px;
+        margin: 0px;
+
+
+      }
+      #send_message_btn{
+        font-size: 30px;
+        margin: 0px;
+        padding: 0px;
+        color: #00b4d8;
+        padding-bottom : 10px;
+      }
+      #send_message_form{
+        margin: 0px;
+        padding: 0px;
+
+
+      }
+      .Patient_Message{
+
+        background-color:	#00b4d8 ;
+        color: white;
+        border-radius: 25px;
+        margin-left: 20%;
+      }
+      .Patient_Message p{
+        margin: 0;
+        padding: 3px;
+        text-indent: 20px;
+        white-space: normal;
+      }
+      .Staff_Message{
+
+        background-color:	#E5E4E2 ;
+        color: black;
+        border-radius: 25px;
+
+      }
+      .Staff_Message p{
+        margin: 0;
+        padding: 3px;
+        text-indent: 20px;
+        white-space: normal;
+      }
+
+
+
+}
