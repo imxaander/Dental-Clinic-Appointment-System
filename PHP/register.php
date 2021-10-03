@@ -5,7 +5,7 @@ include "../includes/con_db.inc.php";
 
 include "functions.php";
 
-require_once('PHPMailer\PHPMailerAutoload.php');
+require_once ('PHPMailer-5.2-stable\PHPMailerAutoload.php');
 
 if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['First_Name']) && isset($_POST['Last_Name']) && isset($_POST['Age']) && isset($_POST['Date_of_Birth']) && isset($_POST['Gender']) && isset($_POST['Occupation']) && isset($_POST['Branch']) && isset($_POST['Civil_Status']) && isset($_POST['Contact_No']) && isset($_POST['Verified']) && isset($_POST["Middle_Name"]))
 {
