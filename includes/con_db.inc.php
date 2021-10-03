@@ -1,9 +1,9 @@
 <?php
 
-$sname= "bmcyt4tdmy8gezphoedx-mysql.services.clever-cloud.com";
-$uname= "unsmamkc9ng9ew7d";
-$pword= "jROOddKy0Sm53e6hPX97";
-$dbname= "bmcyt4tdmy8gezphoedx";
+$sname= "sql6.freemysqlhosting.net";
+$uname= "sql6441996";
+$pword= "TfGhZp2LeG";
+$dbname= "sql6441996";
 
 $con = mysqli_connect($sname, $uname, $pword, $dbname);
 
