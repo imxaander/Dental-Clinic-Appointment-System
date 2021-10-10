@@ -1,9 +1,9 @@
 <?php
 
-$sname= "sql6.freemysqlhosting.net";
-$uname= "sql6441996";
-$pword= "TfGhZp2LeG";
-$dbname= "sql6441996";
+$sname= "databases.000webhost.com";
+$uname= "id17739275_admin";
+$pword= "yZDJHN9a%u5_pQn";
+$dbname= "id17739275_appointment_system";
 
 $con = mysqli_connect($sname, $uname, $pword, $dbname);
 
