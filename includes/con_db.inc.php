@@ -1,9 +1,9 @@
 <?php
 
-$sname= "databases.000webhost.com";
-$uname= "id17739275_admin";
-$pword= "yZDJHN9a%u5_pQn";
-$dbname= "id17739275_appointment_system";
+$sname= "bmcyt4tdmy8gezphoedx-mysql.services.clever-cloud.com";
+$uname= "unsmamkc9ng9ew7d";
+$pword= "jROOddKy0Sm53e6hPX97";
+$dbname= "bmcyt4tdmy8gezphoedx";
 
 $con = mysqli_connect($sname, $uname, $pword, $dbname);
 
