@@ -1,6 +1,6 @@
 <?php
 
-$sname= "49c2-136-158-3-111.ngrok.io";
+$sname= "4.tcp.ngrok.io:19537";
 $uname= "root";
 $pword= "";
 $dbname= "appointment_system";
