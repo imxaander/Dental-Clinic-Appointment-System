@@ -9,11 +9,8 @@
 .insertapp-input-div{
   height: 500px;
 }
-.carousel-control-prev{
-
-}
-.carousel-control-next{
-  
+#notifications{
+  display: none;
 }
 @media all and (max-width: 740px){
   #darkenSvc{

@@ -34,9 +34,6 @@ if (isset($_POST["Patient_Id"]) && isset($_POST["Staff_Id"])) {
         <p style="text-align: center;">Civil Status : <?php echo $row["Civil_Status"]; ?></p>
 <br>
     	</div>
-
-
-
     </body>
     </html>
 

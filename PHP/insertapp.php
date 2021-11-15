@@ -65,6 +65,23 @@ if (isset($_POST["Appointment_Id"]) && isset($_POST["Duration"]) &&isset($_POST[
         $sql = "INSERT INTO appointments(Appointment_Id, Patient_Id, Cost, Service, Medical_History, Time, Date, Status, Branch, Message, Duration) VALUES('$Appointment_Id', '$Patient_Id', '$Cost', '$Service', '$Medical_History', '$Time', '$Date', '$Status', '$Branch', '$Message', '$Duration')";
         $result = mysqli_query($con, $sql);
    if ($result) {
+     date_default_timezone_set('Asia/Manila');
+
+                 $notif_id = uniqid('NT');
+                 $notif_title = "Your appointment has been <b>Posted</b>";
+                 $notif_desc = "Appointment(". $Appointment_Id .")has been posted. Please wait for approval and check your messages for concern.";
+                 $notif_time = date("h:i A");
+                 $notif_date = date("Y-m-d");
+                 $viewed = "0";
+                 $sql = "INSERT INTO notifications(notif_id, patient_id, notif_title, notif_desc, time, date, viewed) VALUES('$notif_id', '$Patient_Id', '$notif_title', '$notif_desc', '$notif_time', '$notif_date', '$viewed' )";
+                 $result = mysqli_query($con, $sql);
+
+                 if ($result) {
+                   header("Location: ../index.php?");
+                   exit();
+                 }else{
+                   echo "There is something wrong with adding shits";
+                 }
        header("Location: ../index.php?success=Appointment Added. Please Wait for some changes within the day. Thank you!");
        exit();
    }else{

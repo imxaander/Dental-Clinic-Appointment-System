@@ -42,7 +42,6 @@
   width: 93%;
   border-radius: 25px;
   height: 300px;
-background
 box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
 transition: display 0.3s;
 margin-bottom: 10px;
@@ -514,7 +513,7 @@ margin-left: 5%;
         float: right;
         position: relative;
         color: white;
-        
+
       }
       #UserPanel{
         display: hidden;
@@ -644,7 +643,25 @@ margin-left: 5%;
         text-indent: 20px;
         white-space: normal;
       }
+      #notification-container{
+        width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 0 50px #ccc;
+        height: 80%;
+        overflow-y: scroll;
+      }
+      .notif{
+        padding: 10px;
+        padding-bottom: 30px;
+      }
+      .notif-desc{
+          text-indent: 5px;
+      }
+      .notif-td{
+        font-size: 15px;
+        float: right;
+
+      }
 
 
 
-}

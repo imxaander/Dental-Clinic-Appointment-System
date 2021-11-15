@@ -102,6 +102,13 @@ else
     if (isset($_SESSION["Patient_Id"]))
     { ?>
             <a class="tablinkspc" href="#" onclick="openCity(event, 'Appointments')"><i class="fas fa-calendar-check"></i> Appointments</a>
+            <a class="tablinkspc" href="#" onclick="openCity(event, 'Notifications')" data-role="viewnotif" data-id="<?php echo $Patient_Id ?>"><i class="far fa-user-circle"></i> Notifications <span style="background-color: white; color: black; padding: 5px; border-radius: 6px;"><?php
+            $sql = "SELECT * FROM notifications WHERE viewed = '0' AND patient_id = '$Patient_Id' ";
+            $result = mysqli_query($con, $sql);
+
+            echo mysqli_num_rows($result);
+
+             ?><span></a>
             <a class="tablinkspc" href="#" onclick="openCity(event, 'Profile_Page')"><i class="far fa-user-circle"></i> Profile</a>
             <?php
     } ?>
@@ -154,6 +161,7 @@ echo 'openappinsert()';
                 <span><img id="profile-picture" src="<?php echo $_SESSION["Image"]; ?>"></span>
                 <p id="profile-name"><?php echo $_SESSION["First_Name"]; ?> <?php echo $_SESSION["Last_Name"]; ?></p>
             </div>
+            
             <?php
     }
     else if (isset($_SESSION["Staff_Id"]))
@@ -190,6 +198,13 @@ echo 'openappinsert()';
     { ?>
             <a class="tablinks" href="#Appointments" onclick="openCity(event, 'Appointments')"><i class="fas fa-calendar-check"></i> Appointments</a><br>
             <a class="tablinks" href="#Profile_Page" onclick="openCity(event, 'Profile_Page')"><i class="fas fa-phone"></i>  Profile</a><br>
+            <a class="tablinks" href="#notifications" onclick="openCity(event, 'Notifications')" data-role="viewnotif" data-id="<?php echo $Patient_Id ?>"><i class="far fa-user-circle"></i> Notifications <span style="background-color: white; color: black; padding: 5px; border-radius: 6px;"><?php
+            $sql = "SELECT * FROM notifications WHERE viewed = '0' AND patient_id = '$Patient_Id' ";
+            $result = mysqli_query($con, $sql);
+
+            echo mysqli_num_rows($result);
+
+             ?><span></a>
             <?php
     } ?>
 
@@ -553,7 +568,7 @@ while ($row = mysqli_fetch_array($result)){ ?>
 
           	<div style="box-shadow: 0 0 25px rgba(0, 0, 0, 0.25); width: 90%; position:relative; left: 5%;" >
               <br>
-              <img src="https://www.tech101.in/wp-content/uploads/2018/07/blank-profile-picture.png" style="border-radius: 50%; width : 100px; display: block;height : 100px; margin-left: auto; margin-right: auto;">
+              <img src="<?php echo $_SESSION["Image"] ?>" style="border-radius: 50%; width : 100px; display: block;height : 100px; margin-left: auto; margin-right: auto;">
               <br>
               <p style="text-align: center;">Name : <?php echo $_SESSION["First_Name"]; ?> <?php echo $_SESSION["Last_Name"]; ?></p>
               <p style="text-align: center;">Age : <?php echo $_SESSION["Age"]; ?></p>
@@ -563,6 +578,29 @@ while ($row = mysqli_fetch_array($result)){ ?>
               <p style="text-align: center;">Civil Status : <?php echo $_SESSION["Civil_Status"]; ?></p>
       <br>
           	</div>
+        </div>
+        <!-- notifications -->
+        <div class="tabcontent" id="Notifications">
+            <div id="notification-container" >
+              <?php
+              $sql = "SELECT * FROM notifications WHERE patient_id = '$Patient_Id' ORDER BY date, time DESC";
+              $result = mysqli_query($con, $sql);
+
+              while($row = mysqli_fetch_assoc($result)){ ?>
+                <div class="notif" <?php if(!$row["viewed"] == 1){ ?>
+                  style="background-color:  #00b4d8;
+                  <?php } ?>">
+                  <h5><?php echo $row["notif_title"] ?></h5>
+                  <p class="notif-desc"><?php echo $row["notif_desc"] ?></p>
+                  <p class="notif-td"><?php echo $row["time"] ?> <?php echo $row["date"] ?></p>
+                </div>
+                <hr>
+                <?php }?>
+
+
+            </div>
+
+
         </div>
         <?php
     } ?>
@@ -600,8 +638,11 @@ while ($row = mysqli_fetch_array($result)){ ?>
   </button>
       </div>
       <div class="carousel-item insertapp-input-div">
-        <p> Preffered Time : <span><input type="time"  onchange="Time24()" name="Time" id="timeinput" min="10:00" max="17:00"></span></p>
+
+        <p> Preffered Time :<select class="" name="Time" id="timeinput" id="svcs"> <option value=""></option> </select> </p>
+        <!-- <input type="time"  onchange="Time24()" name="Time" id="timeinput" min="10:00" max="17:00">  -->
     <p> Preffered Date : <span><input type="date" id="dateinput"name="Date" min="<?php echo date("Y-m-d"); ?>"></span></p>
+    Time range<p id="timeranged"> </p>
       <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FManila&src=ai5nb256YWxlcy5kZW50YWxjbGluaWNAZ21haWwuY29t&src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%230B8043&showTitle=0&showPrint=0&showTz=0" style="border:solid 1px #777" width="350" height="350" frameborder="0" scrolling="no"></iframe>
         <button  id="medicalinputbtn"class="insert-slides-btn" data-bs-target="#insertappslider" data-bs-slide="next">
 medical history - >

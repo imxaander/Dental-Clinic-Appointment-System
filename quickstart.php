@@ -90,6 +90,7 @@ if (isset($_GET["Name"]) || isset($_GET["Service"]) || isset($_GET["STime"]) || 
   $sql = "SELECT * FROM patients WHERE Patient_Id = '$esr'";
   $result = mysqli_query($con, $sql);
 
+  
   while($row = mysqli_fetch_array($result)){
     $DEmail = $row["Email"];
     $DFname = $row["First_Name"];
@@ -102,7 +103,7 @@ if (isset($_GET["Name"]) || isset($_GET["Service"]) || isset($_GET["STime"]) || 
   $DDate = $_GET["Date"];
   $DBranch = $_GET["Branch"];
 
-
+  date_default_timezone_set('Asia/Manila');
   $event = new Google_Service_Calendar_Event(array(
     'summary' => $DService . "Service",
     'location' => 'J Gonzales Dental Center '.$DBranch.' Branch',
@@ -120,16 +121,87 @@ if (isset($_GET["Name"]) || isset($_GET["Service"]) || isset($_GET["STime"]) || 
     ),
     'attendees' => array(
       array('email' => $DEmail, 'displayName' => "'. $DFname . ' '. $DLname''"),
-
-
-
     ),
 
   ));
 
   $calendarId = 'primary';
   $event = $service->events->insert($calendarId, $event);
+  echo "uwu done";
 
+  //emails when appointment is approved... no fuck off
+
+  /*
+  $url = "http://" . $_SERVER['SERVER_NAME'] . "/PHP/verify.php?vcode=" . $vcode;
+
+                $subject = 'Verify your account for J. Gonzales Clinic';
+
+                $message = '
+                <div style="
+                font-family : monospace;
+                width : 300px;
+                height : 400px;
+                border : #00b4d8;
+                border-style : solid;
+                ">
+                <div style="
+                height : 10%;
+                border-bottom: solid;
+                border-color : #00b4d8;
+                background-color : #00b4d8;
+                ">
+              <p align="center" style="
+                margin : 0;
+                font-size : 20px;
+                color : white;
+              "> J Gonzales Dental Center</p>
+                </div>
+                <br>
+
+
+
+                <a href="'. $url . '"  style="
+              margin:auto; text-align:center; display:block;
+              padding : 10px;
+              text-decoration : none;
+              color : white;
+              background-color : #00b4d8;
+              width : 60%;
+              border-radius : 5px;
+                "
+                >Verify Email Address.</a>
+            <br>
+              <p style="
+                text-indent : 30px;
+                margin : 10px;
+                line-height: 30px;
+              ">
+                To continue the account creation for J Gonzales Dental Center, please click "Verify Email Address" button at the top. If you have already verified your account, Please ignore this message. Thank you.
+              </p>
+              <br>
+              <p style="
+            margin : 10px;
+              ">
+                Regards,<br>
+                J Gonzales Dental Center
+              </p>
+                </div>
+                ';
+
+                $mail = new PHPMailer();
+                $mail->isSMTP();
+                $mail->SMTPAuth = true;
+                $mail->SMTPSecure = 'ssl';
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Port = '465';
+                $mail->isHTML();
+                $mail->Username = 'j.gonzales.dentalclinic@gmail.com';
+                $mail->Password = 'j.gonzales.dentalclinic@gmail.com123';
+                $mail->addAddress($Email);
+                $mail->SetFrom('no-reply@jgonzales.com');
+                $mail->Subject = $subject;
+                $mail->Body = $message;
+  */
 }else{
   echo "no get method";
 }

@@ -61,9 +61,10 @@ if (confirm) {
         url : './PHP/ongoing.php',
         method : 'post',
         data : {Appointment_Id : Appointment_Id},
-        success: function (result){
+        success: function (data){
           fetchappointments();
           fetchbranchappointments();
+          console.log(data);
         }
     });
 }else{
@@ -120,7 +121,7 @@ $(document).on('click','i[data-role="send_message"]',function() {
 });
 setInterval(function(){
   $('#message_history').load("./PHP/fetchmessages.php", {chat_id: $('#chat_id').val()}).fadeIn("slow");
-  console.log($('.Message').length);
+  
 
 }, 500);
 
@@ -167,7 +168,31 @@ $(document).on('click','div[data-role="loadinfopatient"]',function() {
   $('.AppInfo').load("./PHP/fetchappointmentinfopatient.php", {Appointment_Id: Appointment_Id}).fadeIn("slow");
 });
 
+$(document).on('click','a[data-role="viewnotif"]',function() {
+  var Patient_Id = $(this).data('id');
+  $.ajax({
+    url: "./PHP/viewnotif.php",
+    method: "POST",
+    data: {Patient_Id: Patient_Id},
+    success:function(data){
+      console.log(data);
+    }
+  });
 
+});
+$(document).on('click','button[data-role="dltstacc"]',function() {
+  let Staff_Id = $(this).data('id');
+  console.log(Staff_Id);
+  $.ajax({
+    url: "./PHP/staffaccountdelete.php",
+    method: "POST",
+    data: {Staff_Id: Staff_Id},
+    success:function(data){
+      console.log("success");
+      location.reload();
+    }
+  });
+});
 $('#svcs').on('change', function(){
   document.getElementById('timedateinput').style.display = "block";
   var service = this.value;
@@ -187,6 +212,48 @@ $('#staffemailinput').on('keyup', function(){
   $('#emailpreview').text(w1 + '@jgonzales.com');
   $('#usernamestaff').val(w1 + '@jgonzales.com');
 });
+
+var preftime = $('#timeinput');
+var prefdate = $('#dateinput');
+
+console.log(preftime);
+
+//*** This code is copyright 2002-2003 by Gavin Kistner, !@phrogz.net
+//*** It is covered under the license viewable at http://phrogz.net/JS/_ReuseLicense.txt
+
+Date.prototype.customFormat = function(formatString){
+  var YYYY,YY,MMMM,MMM,MM,M,DDDD,DDD,DD,D,hhhh,hhh,hh,h,mm,m,ss,s,ampm,AMPM,dMod,th;
+  YY = ((YYYY=this.getFullYear())+"").slice(-2);
+  MM = (M=this.getMonth()+1)<10?('0'+M):M;
+  MMM = (MMMM=["January","February","March","April","May","June","July","August","September","October","November","December"][M-1]).substring(0,3);
+  DD = (D=this.getDate())<10?('0'+D):D;
+  DDD = (DDDD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][this.getDay()]).substring(0,3);
+  th=(D>=10&&D<=20)?'th':((dMod=D%10)==1)?'st':(dMod==2)?'nd':(dMod==3)?'rd':'th';
+  formatString = formatString.replace("#YYYY#",YYYY).replace("#YY#",YY).replace("#MMMM#",MMMM).replace("#MMM#",MMM).replace("#MM#",MM).replace("#M#",M).replace("#DDDD#",DDDD).replace("#DDD#",DDD).replace("#DD#",DD).replace("#D#",D).replace("#th#",th);
+  h=(hhh=this.getHours());
+  if (h==0) h=24;
+  if (h>12) h-=12;
+  hh = h<10?('0'+h):h;
+  hhhh = hhh<10?('0'+hhh):hhh;
+  AMPM=(ampm=hhh<12?'am':'pm').toUpperCase();
+  mm=(m=this.getMinutes())<10?('0'+m):m;
+  ss=(s=this.getSeconds())<10?('0'+s):s;
+  return formatString.replace("#hhhh#",hhhh).replace("#hhh#",hhh).replace("#hh#",hh).replace("#h#",h).replace("#mm#",mm).replace("#m#",m).replace("#ss#",ss).replace("#s#",s).replace("#ampm#",ampm).replace("#AMPM#",AMPM);
+};
+
+
+for(let i = 0; i < 7; i++){
+  let tym = 60 * i;
+  let baseTym = 7240000;
+  let lastTym = new Date(baseTym + (tym * 60000));
+  let finalTym = lastTym.customFormat('#hhh# : #mm# #AMPM#');
+  let optionTC = document.createElement("option");
+  let optionTT = document.createTextNode(finalTym);
+  optionTC.setAttribute("value", lastTym.customFormat('#hhh#:#mm#'));
+  optionTC.appendChild(optionTT);
+  $('#timeinput').append(optionTC);
+  console.log(finalTym);
+}// Append the text to <li>
 
 });
 

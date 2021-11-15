@@ -7,6 +7,8 @@ include "functions.php";
 
 require_once ('PHPMailer\PHPMailerAutoload.php');
 
+
+
 if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['First_Name']) && isset($_POST['Last_Name']) && isset($_POST['Age']) && isset($_POST['Date_of_Birth']) && isset($_POST['Gender']) && isset($_POST['Occupation']) && isset($_POST['Branch']) && isset($_POST['Civil_Status']) && isset($_POST['Contact_No']) && isset($_POST['Verified']) && isset($_POST["Middle_Name"]))
 {
 
@@ -124,7 +126,7 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
             if ($result)
             {
 
-                $url = "http://jgonzalesappointmentsystem.herokuapp.com/PHP/verify.php?vcode=" . $vcode;
+                $url = "http://" . $_SERVER['SERVER_NAME'] . "/PHP/verify.php?vcode=" . $vcode;
 
                 $subject = 'Verify your account for J. Gonzales Clinic';
 
@@ -201,8 +203,23 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
                 }
                 else
                 {
-                    header("Location: ../register_page.php?success=Your account has been successfully created. Please check your email for verification link.");
-                    exit();
+                    date_default_timezone_set('Asia/Manila');
+                    $notif_id = uniqid('NT');
+                    $notif_title = "Your account has been <b>Created</b>";
+                    $notif_desc = "Your account has been created and ready to go! Please check your email for verification link so you can start here!";
+                    $notif_time = date("h:i A");
+                    $notif_date = date("Y-m-d");
+                    $viewed = "0";
+                    $sql = "INSERT INTO notifications(notif_id, patient_id, notif_title, notif_desc, time, date, viewed) VALUES('$notif_id', '$Patient_Id', '$notif_title', '$notif_desc', '$notif_time', '$notif_date', '$viewed' )";
+                    $result = mysqli_query($con, $sql);
+
+                    if ($result) {
+                      header("Location: ../register_page.php?success=Your account has been successfully created. Please check your email for verification link.");
+                      exit();
+                    }else{
+                      echo "There is something wrong with adding shits";
+                    }
+
                 }
 
             }

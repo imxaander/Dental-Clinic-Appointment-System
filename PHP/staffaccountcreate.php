@@ -12,7 +12,7 @@ if(isset($_POST["User_Name"])) {
   $result = mysqli_query($con, $sql);
 
   if($result) {
-    header("Location : /index.php");
+    header("Location: /index.php");
     exit();
   }
 }

@@ -10,11 +10,11 @@ function VCode($length = 5) {
 }
 
 function validate($data){
-        
+
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
     return $data;
-    
+
  }
 ?>
