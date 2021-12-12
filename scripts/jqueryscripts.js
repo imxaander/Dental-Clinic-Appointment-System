@@ -139,7 +139,7 @@ $("#message_history").scrollTop($("#message_history")[0].scrollHeight);
 }, 10);
 
 function fetchappointments(){
-  $('.appointment-listing').load("./PHP/fetchappointments.php", {Patient_Id: $('#user_idP').val()}).fadeIn("slow");
+  $('.appointment-listing').load("./PHP/fetchappointments.php", {Patient_Id: $('#user_idP').val()});
   console.log("Appointment Refreshed.");
 }
 fetchappointments();
@@ -269,4 +269,35 @@ function Time24() {
     $(this).addClass('selected');
 
 
+//saving technique
+
+var savebtn = $('#save-btn');
+
+savebtn.on('click', () =>{
+  var sharednotes = $('#sharednotes').val();
+  var notesbranch = $('#user_Branch').val();
+
+  
+  document.getElementById('save-btn').innerHTML = 'Saving...';
+  $.ajax({
+    url : './PHP/savenotes.php',
+    method : 'post',
+    data : {Content : sharednotes, Branch : notesbranch},
+    success: function (result){
+      document.getElementById('save-btn').innerHTML = 'Saved.';
+      console.log(result);
+    }
+});
+})
+
+
+});
+//calendar
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    events: 'PHP/fetchevents.php'
+  });
+  calendar.render();
 });

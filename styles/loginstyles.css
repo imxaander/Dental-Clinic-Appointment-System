@@ -1,4 +1,4 @@
-@media all and (min-width: 700px){
+
 /* big screen */
 body{
     margin: 0;
@@ -17,9 +17,10 @@ body{
 #main-form{
     grid-area: right;
     background-color: #00b4d8;
-    width: 700px;
+    width: 500px;
     min-height:100%;
     position: relative;
+    transition: 0.4s;
 }
 .header-text{
     font-size: x-large;
@@ -53,9 +54,12 @@ body{
     margin: 0 auto;
     position: relative;
     width: 50%;
-
 }
-
+#title_text{
+    background-color: white;
+    margin: 0px;
+    padding: 10px;
+}
 
 .login_text{
     grid-area: registerheader;
@@ -133,7 +137,6 @@ body{
     width: 80%;
 
     grid-template-areas:
-        'registerheader registerheader registerheader registerheader'
         'email email password password'
         'firstname firstname middlename lastname'
         'age address birthdate gender'
@@ -156,4 +159,29 @@ body{
 .success{
     color: green;
 }
+
+
+@media all and (max-width: 699px){
+    #register-form{
+        width: 100%;
+        grid-template-areas:
+        'email password'
+        'firstname middlename'
+        'lastname age'
+        'address birthdate'
+        'gender occupation'
+        'branch civilstatus '
+        'contactno image '
+        'submitbtn submitbtn'
+    ;
+    }
+    #bigpicture{
+        display: none;
+    }
+    #main-content{
+        display : block;
+    }
+    #main-form{
+        width: 100%;
+    }
 }

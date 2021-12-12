@@ -214,7 +214,7 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
                     $result = mysqli_query($con, $sql);
 
                     if ($result) {
-                      header("Location: ../register_page.php?success=Your account has been successfully created. Please check your email for verification link.");
+                      header("Location: ../login_page.php?success=Your account has been successfully created. Please check your email for verification link.");
                       exit();
                     }else{
                       echo "There is something wrong with adding shits";

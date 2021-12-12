@@ -54,7 +54,7 @@ if (isset($_GET["vcode"])) {
     exit();
     }
 
-
+    
 
 }else{
     header("Location: ../index.php");

@@ -12,6 +12,20 @@
 	<title>Login or Register - J Gonzales Dental Center</title>
 </head>
 <body>
+	<?php
+		if (isset($_GET["register"])) {
+			
+		
+	?>
+	<script>
+		$(document).ready(()=>{
+			switchToReg();
+		})
+		
+	</script>
+	<?php
+	}
+	?>
 	<div id="main-content">
 
 	<div id="bigpicture">
@@ -20,10 +34,11 @@
 
 
 	<div id="main-form">
-	<form action="PHP/login.php" method="POST" id="login-form" style="">
-	<div class="login_text" style="margin: 0;">
-		<p class="header-text centered-text">Login</p>
+	<div id="title_text" >
+		<p class="header-text centered-text" style="margin: 0; color:#00b4d8" id="tltxt">Login</p>
 	</div>
+	<form action="PHP/login.php" method="POST" id="login-form" style="">
+	
 	<?php if(isset($_GET['error'])){?>
 		<p class="error"><?php echo $_GET['error'];?>!</p>
 	<?php } ?>
@@ -44,17 +59,12 @@
 
 	<!-- Register -->
 	<form action="PHP/register.php" method="POST" id="register-form">
-
-	<div class="login_text">
-		
-		<p class="header-text centered-text">Register</p>
 	<?php if(isset($_GET['error'])){?>
 		<p class="error"><?php echo $_GET['error'];?>!</p>
 	<?php } ?>
 	<?php if(isset($_GET['success'])){?>
 		<p class="success"><?php echo $_GET['success'];?>!</p>
 	<?php } ?>
-	</div>
 	
 	<div class="input-email">
 	<p class="subheader-text" >Email : </p>
@@ -118,7 +128,7 @@
 	<span><select name="Branch" class="input-boxes" required="true">
         <option value=""></option>
         <option value="Cupang">Cupang</option>
-        <option value="Gatchalian">Gatchalian</option>
+        <option value="Paranaque">Paranaque</option>
 		<option value="Makati">Makati</option>
     </select></span>
     </div>

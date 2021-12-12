@@ -5,7 +5,8 @@ $Patient_Id = $_SESSION["Patient_Id"] ?? "";
 $Branch = $_SESSION["Branch"] ?? "";
 if ($_SESSION["Verified"] == "0")
 {
-    header("Location: verify_page.php?error=Please check your email and click the link from us to verify. Check your spam if necessary.");
+    session_destroy();
+    header("Location: /login_page.php?error=Please check your email and click the link from us to verify. Check your spam if necessary.");
     exit();
 
 }
@@ -26,8 +27,8 @@ else
 <link rel="stylesheet" type="text/css" href='styles/indexstylespc.css' />
 <link rel="stylesheet" href="styles/teststyle.css">
 <link rel="stylesheet" href="styles/minigallery.css">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>J Gonzales Dental Center</title>
+<script src="scripts/fullcalendar/lib/main.js"></script>
+<link href='scripts/fullcalendar/lib/main.css' rel='stylesheet' />
 <script src="scripts/slideshow.js"></script>
     <script src="scripts/indexscripts.js"></script>
     <script type="text/javascript">
@@ -40,13 +41,15 @@ else
     <script type="text/javascript" src="scripts/minigallery.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <div id="fb-root"></div>
+  
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0" nonce="qtfS508k"></script>
-
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>J Gonzales Dental Center</title>
 
 </head>
 <body>
-<input type="hidden" name="" id="user_idP" value="<?php echo $_SESSION["Patient_Id"]; ?>">
+<input type="hidden" name="" id="user_idP" value="<?php echo $_SESSION["Patient_Id"]?>">
+<input type="hidden" name="" id="user_Branch" value="<?php echo $_SESSION["Branch"]?>">
 <div id="darken" onclick="closeSideBar()"></div>
 <div class="top-logo-pc">
   <div class="logo-div">
@@ -65,7 +68,7 @@ else
     { ?>
     <a class="tablinks" href="login_page.php" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Login</a>
     <hr>
-    <a class="tablinks" href="register_page.php" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Register</a><br>
+    <a class="tablinks" href="login_page.php?register=1" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Register</a><br>
     <?php
     } ?>
     <?php if (isset($_SESSION["Staff_Id"]))
@@ -113,18 +116,24 @@ else
             <?php
     } ?>
 
-    <a class="tablinkspc appinsertbtnpc"  style="position: absolute;
+    <?php 
+      if(isset($_SESSION["Staff_Id"])){?>
+
+    <?php  }else{ ?>
+      <a class="tablinkspc appinsertbtnpc"  style="position: absolute;
     background-color: black;
     padding: 10px;
     right: 0%;
     width: 150;
     margin-top: -10px;
-    margin-right: 1%;"onclick="<?php if(!empty($_SESSION["Email"])){
-echo 'openappinsert()';
-
-}else{
-  echo 'registertocontinue()';
-} ?>" id="" href="#"><i class="fas fa-book"> </i> Book Now!</a></div>
+    margin-right: 1%;"onclick="<?php 
+    if(!empty($_SESSION["Email"])){
+        echo 'openappinsert()';
+    }else{
+        echo 'registertocontinue()';
+    } ?>" id="" href="#"><i class="fas fa-book"> </i> Book Now!</a></div>
+    <?php }?>
+    
 
 
     </div>
@@ -177,7 +186,7 @@ echo 'openappinsert()';
     { ?>
                 <br>
 				<a href="login_page.php" class="no-acc"><i class="fas fa-sign-out-alt"></i>Login</a></p><hr style="width : 50%">
-                <a href="register_page.php" class="no-acc"><i class="fas fa-sign-out-alt"></i>Register</a></p>
+                <a href="login_page.php?register=1" class="no-acc"><i class="fas fa-sign-out-alt"></i>Register</a></p>
 			<?php
     } ?>
         </div>
@@ -240,10 +249,25 @@ echo 'openappinsert()';
   <div id="AppPanel">
 
 <div class="AppPanel" style="margin-bottom:10px;">
-
+             
 </div>
+                
 <div class="AppInfo">
-
+b
+</div>
+<div id="OnCallApp">
+  <textarea style="
+  box-sizing:border-box;
+  margin-left: 5%;
+  height: 90%;
+  width: 80%;" id="sharednotes"><?php
+  $sql = "SELECT * FROM oncall_appointments WHERE branch = '$Branch'";
+  $result = mysqli_query($con, $sql);
+  while($row = mysqli_fetch_assoc($result)){
+    echo $row["content"];
+  }
+  ?></textarea>
+  <button width="5%" id="save-btn" >Save</button>
 </div>
             </div>
 
@@ -424,8 +448,35 @@ while ($row = mysqli_fetch_array($result)){ ?>
 ?>
               </div>
             </div>
-            <div class="info">
-              <h3>Info</h3>
+            <br>
+            <div class="info">  
+              <br>
+              <div id="info-container">
+	              <div class="branch-infos">
+                  <h3> <b> <i class="fas fa-building"></i> Muntinlupa Branch </b></h3>
+                  <p> <i class="fas fa-clock"></i> 11:00 AM - 6:00 PM</p>
+                  <p> <i class="fas fa-calendar-week"></i> Tuesday to Saturday </p>
+                  <p> <i class="fas fa-phone"></i> 09158420620 / 09224261426 </p>
+                  <p> <i class="fas fa-map-marker-alt"></i> 500-A Manuel L Quezon St. Cupang Muntinlupa City </p>
+                  <a style="font-size: 30px;" href="https://www.facebook.com/jgonzalesdentalcentermuntinlupa/"><p><i class="fab fa-facebook-square"></i><p></a>
+
+	              </div>
+                <div class="branch-infos">
+                  <h3> <b> <i class="fas fa-building"></i> Paranaque Branch </b></h3>
+                  <p> <i class="fas fa-clock"></i> 11:00 AM - 6:00 PM</p>
+                  <p> <i class="fas fa-calendar-week"></i> Monday, Friday, Saturday, Sunday </p>
+                  <p> <i class="fas fa-tty"></i> 8132584 </p>
+                  <p> <i class="fas fa-map-marker-alt"></i> 248 Palanyag Road Brgy. San Dionisio Parañaque City </p>
+                  <a style="font-size: 30px;" href="https://www.facebook.com/jgonzalesdentalcenter/"><p><i class="fab fa-facebook-square"></i></p></a>
+
+	              </div>
+                <div class="branch-infos">
+                  <h3> <b> <i class="fas fa-building"></i> Makati Branch </b></h3>
+                  <br>
+                  <br>
+                  <h4> <b> Under Construction... </b></h4>
+	              </div>
+              </div>
             </div>
 
 
@@ -496,15 +547,105 @@ while ($row = mysqli_fetch_array($result)){ ?>
 
         </div>
         <div class="tabcontent" id="Doctors">
-            <h4>Doctors</h4>
+      
+            <div id="doctors-card-container"> 
+              <div>
+            <h3> Cupang Doctors</h3>
+              <div class="doctors-branch-container" id="cupang-branch-doctors">
+              <?php
+              $sql = "SELECT * FROM doctors WHERE branch = 'Paranaque'";
+              $result = mysqli_query($con, $sql);
+              $drimgdir = "img/doctors/";
+              while($row = mysqli_fetch_assoc($result)){ 
+                #echo $drimgdir . $row["image_loc"];
+                ?>
+                  <div class="doctors-card">
+                    <img src="<?php echo $drimgdir . $row["image_loc"]; ?>" alt="Avatar" style="  ">
+                      <div class="doctors-container">
+                        <h4><b><?php echo $row["name"]?></b></h4> 
+                        <p><b>Specialty :</b> <?php echo $row["specialty"]?></p>
+                        <p><b>Schedules :</b> <?php echo $row["schedules"]?></p>
+                        <p><b>Time :</b> <?php echo $row["time"]?></p> 
+                        <p><b>Branch :</b> <?php echo $row["branch"]?></p> 
+                      </div>
+                  </div>
+            <?php }
+             ?>
+              </div>
+              </div>
+              <div>
+              <h3> Makati Doctors</h3>
+              <div class="doctors-branch-container" id="makati-branch-doctors">
+              <?php
+              $sql = "SELECT * FROM doctors WHERE branch = 'Paranaque'";
+              $result = mysqli_query($con, $sql);
+              $drimgdir = "img/doctors/";
+              while($row = mysqli_fetch_assoc($result)){ 
+                #echo $drimgdir . $row["image_loc"];
+                ?>
+                  <div class="doctors-card">
+                    <img src="<?php echo $drimgdir . $row["image_loc"]; ?>" alt="Avatar" style="  ">
+                      <div class="doctors-container">
+                        <h4><b><?php echo $row["name"]?></b></h4> 
+                        <p><b>Specialty :</b> <?php echo $row["specialty"]?></p>
+                        <p><b>Schedules :</b> <?php echo $row["schedules"]?></p>
+                        <p><b>Time :</b> <?php echo $row["time"]?></p> 
+                        <p><b>Branch :</b> <?php echo $row["branch"]?></p> 
+                      </div>
+                  </div>
+            <?php }
+             ?>
+              </div>
+              </div>
+              <div>
+              <h3> Paranaque Doctors</h3>
+              <div class="doctors-branch-container" id="gatchalian-branch-doctors">
+              
+              <?php
+              $sql = "SELECT * FROM doctors WHERE branch = 'Paranaque'";
+              $result = mysqli_query($con, $sql);
+              $drimgdir = "img/doctors/";
+              while($row = mysqli_fetch_assoc($result)){ 
+                #echo $drimgdir . $row["image_loc"];
+                ?>
+                  <div class="doctors-card">
+                    <img src="<?php echo $drimgdir . $row["image_loc"]; ?>" alt="Avatar" style="  ">
+                      <div class="doctors-container">
+                        <h4><b><?php echo $row["name"]?></b></h4> 
+                        <p><b>Specialty :</b> <?php echo $row["specialty"]?></p>
+                        <p><b>Schedules :</b> <?php echo $row["schedules"]?></p>
+                        <p><b>Time :</b> <?php echo $row["time"]?></p> 
+                        <p><b>Branch :</b> <?php echo $row["branch"]?></p> 
+                      </div>
+                  </div>
+            <?php }
+             ?>
+              </div>
+              </div>
+             </div>
         </div>
         <div class="tabcontent" id="Gallery">
-            <h4>Gallery</h4>
+          <br>
+            <div id="gallery-parent"> 
+              <?php 
+                  $galleryDirName = "img/gallery/";
+                  $galleryImgList = glob($galleryDirName."*.jpg");
+                  foreach($galleryImgList as $galleryImage) { ?>
+                 <div class="gallery-pictures-container" style="
+                      background-image : url('<?php echo $galleryImage?>');
+                      ">
+                      <img src="<?php echo $galleryImage?>" class="gallery-pictures" width="100%">
+                    </div>
+                <?php
+                }  
+              ?>
+            </div>
         </div>
 
         <div class="tabcontent" id="Contact_Us">
-            <h4>Contact Us</h4>
-            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Asia%2FManila&src=ai5nb256YWxlcy5kZW50YWxjbGluaWNAZ21haWwuY29t&src=ZW4ucGhpbGlwcGluZXMjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%230B8043&showTitle=0&showPrint=0&showTz=0" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+            <div id='calendar'></div>
+
         </div>
         <?php if (isset($_SESSION["Patient_Id"]))
     { ?>

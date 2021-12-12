@@ -142,5 +142,5 @@ if (document.getElementById('Home').style.display == 'block') {
 document.getElementById('Home').style.display = 'grid';
 }
 function registertocontinue(){
-  window.location.replace("./register_page.php?error=Register to Book an Appointment");
+  window.location.replace("/login_page.php?error=Register to Book an Appointment");
 }

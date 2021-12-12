@@ -94,7 +94,7 @@ session_start();
 	<span><select name="Branch" class="input-boxes">
         <option value=""></option>
         <option value="Cupang">Cupang</option>
-        <option value="Gatchalian">Gatchalian</option>
+        <option value="Paranaque">Paranaque</option>
 		<option value="Makati">Makati</option>
     </select></span>
     </div>
