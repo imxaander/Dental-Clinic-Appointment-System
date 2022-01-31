@@ -1,0 +1,25 @@
+@import url('https://www.cufonfonts.com/download/web-font/coco-gothic');
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.jgHeaders1 {
+    font-size: 48.83px;
+}
+.jgHeaders2 {
+    font-size: 39.06px;
+}
+.jgTitles1 {
+    font-size: 31.25px;
+}
+.jgTitles2 {
+    font-size: 25.00px;
+}
+.jgPara1 {
+    font-size: 20.00px;
+}
+.jgPara2{
+    font-size: 16.00px;
+}
+.jgPara3{
+		font-size: 11px;
+}

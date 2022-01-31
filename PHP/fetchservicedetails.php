@@ -7,18 +7,12 @@ if (isset($_POST["service"])) {
 
   if ($result) {
     while ($row = mysqli_fetch_array($result)) { ?>
+      <br>
+      <p style="text-align: center;" class="jgTitles2"> <b> <?php echo $row["service"] ?></b></p>
 
-      <p style="text-align: center;"> <b> <?php echo $row["service"] ?></b></p>
-      <p style="margin: 10px;">Type : <?php echo $row["type"] ?></p>
-      <?php if (!empty($row["fixed_price"])){ ?>
-        <p style="margin: 20px; " >Fixed Price : <?php echo $row["fixed_price"] ?></p>
-      <?php }?>
-      <?php if (!empty($row["estimated_price"])){ ?>
-        <p style="margin: 20px;" >Starting <?php echo $row["estimated_price"] ?></p>
-      <?php }?>
-      <p style="margin: 10px;">Description : <?php echo $row["description"] ?></p>
-      <input type="hidden" name="Duration" value="<?php echo $row["estimated_duration"] ?>">
-      <input type="hidden" name="Cost" id="Cost" value="<?php echo $row["estimated_price"] ?>">
+      <p style="margin: 10px; text-align: justify;" class="jgPara1">Description : <?php echo $row["description"] ?></p>
+      <input type="hidden" name="Duration" value="<?php echo $row["duration"] ?>">
+
       <?php
     }
   }

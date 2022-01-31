@@ -6,34 +6,74 @@
     display: block;
   }
 }*/
-.doctors-branch-container{
+#extappinsert{
+  position: fixed;
+  width: 70%;
+  left: 15%;
+  top: 10%;
+  z-index: 4;
+  display: none;
+  background-color: white;
+
+
+}
+#extappinsertbody{
+  padding: 10px;
+}
+#extappinsertheader{
+  background-color: #00b4d8;
+  padding: 10px;
+  color: white;
   text-align: center;
-  width: auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
 }
-#doctors-card-container{
-  display: grid;
-  grid-template-rows: repeat(3, 1fr);
-}
-.doctors-card{
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: auto;
-  height: auto;
-  margin: 0 auto;
 
-}
-.doctors-card img{
-  width: 230px;
 
+#calendar {
+    width: 90%;
+    height: 70%;
+    position: fixed;
+    background-color: white;
+    z-index: 9;
+    top: 15%;
+    left: 5%;
+    padding: 30px;
+    border-radius: 25px;
+    display: none;
 }
-.doctors-container {
-  padding: 2px 16px;
+.fc .fc-scrollgrid-liquid{
+    position: relative;
+    height: 400px;
 }
-#info-container{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.fc .fc-bg-event, .fc .fc-highlight, .fc .fc-non-business, .fc .fc-view-harness-active>.fc-view{
+  height: 50%;
+}
+.fc-view-harness .fc-view-harness-active{
+  height: 50%;
+}
+
+.fc .fc-col-header-cell-cushion {
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 20.00px;
+    color: #00b4d8;
+    text-decoration: none;
+}
+.fc-toolbar-title {
+    font-size: 25.00px;
+    color: #00b4d8;
+}
+.fc-scrollgrid .fc-scrollgrid-liquid{
+    border: black;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+    color: black;
+    font-size: 16.00px;
+}
+
+#info-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 .branch-infos{
   text-align: center;
@@ -69,9 +109,10 @@
 #patient_panel_table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  position: relative;
+  width: 90%;
+  left:5%;
 }
-
 
 #patient_panel_table td, #patient_panel_table th {
   border: 1px solid #ddd;
@@ -88,6 +129,8 @@
   text-align: left;
   background-color:  #00b4d8;
   color: white;
+
+
 }
 
 .awards p{
@@ -97,24 +140,23 @@
 .services{
   border: hidden;
   width: 93%;
-  border-radius: 25px;
+
   height: 300px;
 box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
 transition: 0.3s;
 margin-bottom: 10px;
 background-size: cover;
 position: relative;
+
 text-align: center;
 cursor: pointer;
 
 }
-.services:hover{
-  bottom : 10px;
-  left: 10px;
-  position: relative;
-  box-shadow: 0 25px 25px 25px rgba(0, 0, 0, 0.25);
-
-}
+    .services:hover {
+        transform: translate(10px, -10px);
+        position: relative;
+        transition: 0.3s;
+    }
 
 html {
   scroll-behavior: smooth;
@@ -140,6 +182,7 @@ html {
   #gallery-parent{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    margin-left: 2%;
   }
   .AppInfo{
     height: 100%;
@@ -156,13 +199,13 @@ html {
     grid-area: ocapp;
   }
 
-  #AppPanel{
-    display : grid ;
-    grid-template-areas: 
-    'apanel ainfo'
-    'ocapp ainfo';
-    height: 80%;
-  }
+    #AppPanel {
+        display: grid;
+        grid-template-areas:
+            'apanel ainfo'
+            'apanel ainfo';
+        height: 80%;
+    }
   .AppInfoAll{
     height: 100%;
   }
@@ -203,13 +246,15 @@ html {
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
     display: none;
     overflow-y: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   #Services{
 
   display:  grid;
   /*grid-template-columns: auto auto auto auto auto ;*/
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
   margin-right: 50px;
   margin-left:  50px;
   }
@@ -289,7 +334,7 @@ color : black;
         padding:0;
     }
     body{
-        font-family: 'News Cycle';
+      font-family: 'Roboto', sans-serif;
     }
 
     #head-icon{
@@ -299,7 +344,7 @@ margin-left: auto;
 margin-right: auto;
 height: 10%;
     }
-  }
+
 
     #top-bar-pc{
       position: sticky;
@@ -405,6 +450,7 @@ height: 10%;
       padding-bottom: 20px;
       padding-left: 5px;
       padding-right: 5px;
+      cursor: pointer;
     }
     .tablinkspc.selected{
       background-color: #3C99DC;
@@ -468,6 +514,9 @@ height: 10%;
     .tabcontent h4{
         margin: 0;
     }
+    #calendar2 h2{
+      font-size: 20px;
+    }
 
     .no-acc{
         font-size: 20px;
@@ -490,22 +539,50 @@ height: 10%;
     }
 
     /* appointment form */
-    #appinsert #appformheader{
-      background-color: #00b4d8;
-      position: relative;
-      width: 100%;
-      border-top-left-radius:  25px;
-      border-top-right-radius:  25px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-
+    .insertapp-input-div{
+      height: 500px;
+      overflow-y: scroll;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
     }
-    #appformheadertext{
+    .insertapp-input-div::-webkit-scrollbar {
+      display: none;
+    }
+    .insert-slides-btn{
+      border-radius: 5px;
+      border-style: none;
+      background-color: #00b4d8;
+      color: white;
+      display: inline;
+      padding: 5px;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+
+#appformheader {
+    background-color: #00b4d8;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    box-sizing: border-box;
+    width: auto;
+   padding: 10px;
+
+}
+.right-btns{
+  float: right;
+}
+#appinsert-top {
+    text-align: center;
+    width: 100%;
+    background-color: #00b4d8;
+}
+#appformheadertext {
     font-size: 25px;
     color: white;
     padding: 0;
     margin: 0;
-    }
+}
 
     #appinsert p{
 
@@ -515,19 +592,18 @@ height: 10%;
         background-color: white;
         z-index: 5;
         border-radius: 25px;
-        width: 80%;
-        left: 10%;
+        width: 50%;
+        left: 25%;
         position: fixed;
-        top: 10%;
+        top: 15%;
         margin: 0;
-        padding: 0;
-        overflow-y: scroll;
         display: none;
-        /*width: 80%;
-        position: fixed;
-        z-index: 3;
-        left: 20%;
-        display: block;*/
+        transition-duration: 0.5s;
+        background-image: url('https://cdn.discordapp.com/attachments/793749939430621194/932611538529947658/30..png');
+        background-attachment: fixed;
+        background-position: 50% 70%;
+        background-repeat: no-repeat;
+        background-size: 35%;
     }
     .collapsible {
         background-color: #0077b6;
@@ -544,8 +620,6 @@ height: 10%;
         position: relative;
         margin-left: 5%;
         z-index: 1;
-
-
       }
 
       .content {
@@ -556,10 +630,7 @@ height: 10%;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
         width: 90%;
-
-
-
-margin-left: 5%;
+        margin-left: 5%;
       }
       #appinsert-btn{
         font-size:  40px;
@@ -627,12 +698,12 @@ margin-left: 5%;
         border-radius: 10px;
       }
       #message_container{
-        width: 90%;
-        height: 90%;
+        width: 70%;
+        height: 70%;
         position: fixed;
-        left: 5%;
-        top: 5%;
-        z-index: 6;
+        left: 15%;
+        top: 15%;
+        z-index: 10;
         background-color: white;
         display: none;
         text-indent: 20px;
@@ -644,6 +715,7 @@ margin-left: 5%;
         position: relative;
         background-color: white;
          overflow-x: hidden;
+         padding: 10px;
 
       }
       #openmessagesbtn{
@@ -654,55 +726,78 @@ margin-left: 5%;
         color: white;
         margin: 0;
         box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
-        position: fixed;
-        bottom: 10%;
+
+
         z-index: 3;
-        right: 5%;
+
+        cursor: pointer;
+      }
+      #opencalendarbtn{
+        font-size: 40px;
+        background-color: #00b4d8;
+        padding: 10px;
+        border-radius: 57%;
+        color: white;
+        margin: 0;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+        z-index: 3;
+        cursor: pointer;
       }
       #closemessagesbtn{
         font-size: 30px;
         padding-right: 10px;
         color: white;
+        cursor: pointer;
       }
       #message_content{
-        width: 70%;
+        width: 85%;
         border-radius: 5px;
         padding: 0px;
         margin: 0px;
-
-
+		
       }
+
       #send_message_btn{
-        font-size: 30px;
-        margin: 0px;
-        padding: 0px;
-        color: #00b4d8;
-        padding-bottom : 10px;
+        width : 10%;
+		font-size: 30px	;
+		color: #00b4d8;
+		margin: 0;
+		border-radius:10px;
+		border: none;
+		background-color: white;
+		float: right;
       }
+	  #send_type{
+		background-color: #00b4d8;
+		padding: 1%;
+	  }
+	
+
       #send_message_form{
         margin: 0px;
         padding: 0px;
-
-
       }
       .Patient_Message{
-
+		
         background-color:	#00b4d8 ;
         color: white;
         border-radius: 25px;
-        margin-left: 20%;
+        width: 60%;
+		margin-left: 40%;
       }
       .Patient_Message p{
-        margin: 0;
-        padding: 3px;
-        text-indent: 20px;
+		  
+        margin-left: 5px;
+        padding: 0px;
         white-space: normal;
+		
       }
       .Staff_Message{
 
         background-color:	#E5E4E2 ;
         color: black;
         border-radius: 25px;
+		width: 60%;
 
       }
       .Staff_Message p{
@@ -711,12 +806,26 @@ margin-left: 5%;
         text-indent: 20px;
         white-space: normal;
       }
+	  .message-content-name{
+		font-size: 10px; 
+		
+	  }
+	  .message-content-body{
+	  }
+	  .message-content-timestamp{
+	  }
+	  
       #notification-container{
-        width: 600px;
+        width: 30%;
         margin: 0 auto;
         box-shadow: 0 0 50px #ccc;
         height: 80%;
         overflow-y: scroll;
+        position: fixed;
+        top: 20%;
+        right: 10%;
+        z-index: 20;
+        background-color: white;
       }
       .notif{
         padding: 10px;
@@ -730,6 +839,145 @@ margin-left: 5%;
         float: right;
 
       }
+    #opennotifbtn {
+        font-size: 40px;
+        background-color: #00b4d8;
+        padding: 10px;
+        border-radius: 50%;
+        color: white;
+        margin: 0;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
 
+        z-index: 3;
 
+    }
+    #opennotifpc{
+      font-size: 40px;
+        background-color: #00b4d8;
+        padding: 10px;
+        border-radius: 50%;
+        color: white;
+        margin: 0;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
 
+        z-index: 3;
+        cursor: pointer;
+    }
+    #menubtns{
+      position: fixed;
+      height: 10%;
+      bottom: 20%;
+      right: 5%;
+    }
+
+    .awards{
+      padding: 10px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .feedbacks{
+      padding: 10px;
+      border-style: solid;
+      border-radius: 20px;
+
+    }
+    .feedbacks img{
+      width: 100px;
+      float: right;
+      border-radius: 50%;
+    }
+    .feedback-content{
+      text-align: center;
+      border-left: solid;
+      margin: 10px;
+    }
+    .feedback-header p{
+
+    }
+    .award-img {
+        width: 20%;
+        display: inline-block;
+        padding: 20px;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+    #award-list {
+        position: relative;
+        width: 80%;
+        left: 10%;
+        overflow: auto;
+        white-space: nowrap;
+        cursor: grab;
+    }
+    #award-view {
+        position: fixed;
+        top: 0;
+        width:50%;
+        left: 25%;
+        max-height: 90%;
+        top: 5%;
+        z-index: 4;
+        margin-left: auto;
+        margin-right: auto;
+        display: none;
+    }
+
+    .branchLocations{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 90%;
+      position: relative;
+      left: 5%;
+      border-style: solid;
+      column-gap: 20px;
+      padding:20px;
+    }
+
+    .branchImg{
+      width: 99%;
+    }
+
+    .branch-maps{
+    width: 100%;
+    }
+    .branchLocations div{
+      border-style: solid;
+    }
+    #pqueBranchInfo{
+      border-color: #00b4d8;
+
+    }
+    #pqueBranchInfo div{
+      border-color: #00b4d8;
+      margin:0px;
+      padding:0px;
+    }
+    #cupangBranchInfo{
+      border-color: white;
+
+    }
+    #cupangBranchInfo div{
+      border-color: white;
+      padding-left: -10px;
+
+    }
+    .service-titles-small {
+        position: relative;
+        top: 90%;
+        transform: translateY(-50%);
+        background-color: rgb(255 255 255 / 0.44)
+    }
+    .service-details-container {
+        background-color: white;
+        text-align: justify;
+        padding: 10px;
+        background-color: rgb(255 255 255 / 0.44)
+    }
+    #filterApp{
+      padding: 20px;
+    }
+    
+}

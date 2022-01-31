@@ -2,7 +2,7 @@
 
 $sname= "localhost";
 $uname= "root";
-$pword= "";
+$pword= "jgonzales2022";
 $dbname= "appointment_system";
 
 $con = mysqli_connect($sname, $uname, $pword, $dbname);

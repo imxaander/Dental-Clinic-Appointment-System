@@ -15,14 +15,13 @@ if (isset($_POST["Appointment_Id"])) {
           <p>Appointment_Id :  <?php echo $row["Appointment_Id"]; ?> </p>
           <p>Patient_Id :  <?php echo $row["Patient_Id"]; ?>  <span><a  style="background-color: Red;" class="Status_Btn"  onclick="ProfilePatient()"> Who?</a></span></p>
           <p> Medical History:  <?php echo $row["Medical_History"]; ?> </p>
-          <p>Cost :  <?php echo $row["Cost"]; ?> </p>
           <p>Branch : <?php echo $row["Branch"] ?></p>
           <p>Patient Note :  <?php echo $row["Message"]; ?> </p>
           <hr>
 
-          <span>Time</span> <input type="time" data-id="<?php echo $row["Appointment_Id"]; ?>"  id="etime" value="" placeholder="<?php echo $row["Time"] ?>"><br>
+          <span>Time</span> <input type="time" data-id="<?php echo $row["Appointment_Id"]; ?>"  id="etime" value="<?php echo $row["Time"] ?>" placeholder=""><br>
 
-          <span>Date</span> <input type="date" data-id="<?php echo $row["Appointment_Id"]; ?>"  id="edate" value="" placeholder="<?php echo $row["Date"] ?>">
+          <span>Date</span> <input type="date" data-id="<?php echo $row["Appointment_Id"]; ?>"  id="edate" value="<?php echo $row["Date"] ?>" placeholder="">
 
           <button data-role="updatetd" name="button" data-id="<?php echo $row["Appointment_Id"] ?>">Update time and date</button>
 

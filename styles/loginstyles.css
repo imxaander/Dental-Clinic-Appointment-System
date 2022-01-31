@@ -1,15 +1,17 @@
 
 /* big screen */
-body{
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Space+Grotesk:wght@500&display=swap');
+body {
     margin: 0;
     padding: 0;
     color: white;
+    font-family: 'Roboto', sans-serif;
 }
 .input-boxes{
     height: 25px;
     width: 100%;
-    font-size: 20px;
-    font-family: 'News Cycle';
+    font-size: 15px;
+
     align-content: center;
     border-radius: 10px;
     border: none;
@@ -24,12 +26,12 @@ body{
 }
 .header-text{
     font-size: x-large;
-    font-family: 'News Cycle';
+
     color: white;
 }
 .subheader-text{
     font-size:medium;
-    font-family: 'News Cycle';
+
     color: white;
 }
 .centered-text{
@@ -129,21 +131,19 @@ body{
     padding-left: 10px;
 }
 
-#register-form{
+#register-form {
     display: none;
     height: 80%;
     scroll-behavior: smooth;
     margin: 0 auto;
     width: 80%;
-
     grid-template-areas:
         'email email password password'
-        'firstname firstname middlename lastname'
-        'age address birthdate gender'
-        'occupation branch civilstatus contactno'
-        'image image image image'
-        'submitbtn submitbtn submitbtn submitbtn'
-    ;
+        'firstname middlename lastname lastname'
+        'gender age address address'
+        'occupation branch branch  contactno'
+        'birthdate civilstatus civilstatus image'
+        'submitbtn submitbtn submitbtn submitbtn';
     scrollbar-width: none;
 }
 .switches{
@@ -160,8 +160,27 @@ body{
     color: green;
 }
 
+#register-btn {
+    border: none;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: -10px;
+    color: #00b4d8;
+    background-color: white;
+    cursor: pointer;
+}
 
-@media all and (max-width: 699px){
+#login-btn {
+    border: none;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: -10px;
+    color: #00b4d8;
+    background-color: white;
+    cursor: pointer;
+}
+
+@media all and (max-width: 699px) {
     #register-form{
         width: 100%;
         grid-template-areas:

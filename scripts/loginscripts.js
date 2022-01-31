@@ -34,12 +34,24 @@ $(document).ready(()=>{
             registerForm.style.display = "grid";
             titleText.innerHTML = "Register";
             if (window.innerWidth < 700) {
-                mainForm.style.width = "100%";   
+                mainForm.style.width = "100%";
             }else{
                 mainForm.style.width = "700px";  
             }
     }
+
+    //validations
+
+    $('#reg-first').filter_input({ regex: '[A-z]' });
+    $('#reg-mid').filter_input({ regex: '[A-z]' });
+    $('#reg-last').filter_input({ regex: '[A-z]' });
+    $('#reg-age').filter_input({ regex: '[0-9]' });
+    $('#reg-occupation').filter_input({ regex: '[A-z ]' });
+    $('#reg-no').filter_input({ regex: '[0-9]' });
+    
 })
+
+
 var loginForm = document.getElementById("login-form");
     var registerForm = document.getElementById("register-form");
     var titleText = document.getElementById("tltxt");

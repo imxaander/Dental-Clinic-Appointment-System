@@ -8,7 +8,9 @@
 	<script defer src="scripts/loginscripts.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link href='https://fonts.googleapis.com/css?family=News%20Cycle' rel='stylesheet'>
+	<link rel="stylesheet" href="styles/fonts.css">
 	<meta charset="utf-8">
+	<script src="http://www.thimbleopensource.com/download/jquery/jquery.filter_input.js"></script>
 	<title>Login or Register - J Gonzales Dental Center</title>
 </head>
 <body>
@@ -35,7 +37,7 @@
 
 	<div id="main-form">
 	<div id="title_text" >
-		<p class="header-text centered-text" style="margin: 0; color:#00b4d8" id="tltxt">Login</p>
+		<p class="header-text centered-text jgTitles1" style="margin: 0; color:#00b4d8" id="tltxt">Login</p>
 	</div>
 	<form action="PHP/login.php" method="POST" id="login-form" style="">
 	
@@ -46,19 +48,19 @@
 		<p class="success"><?php echo $_GET['success'];?>!</p>
 	<?php } ?>
 	<div style="padding: 10px;">
-	<p class="subheader-text">Email: </p><input type="email" name="Email" placeholder="Email..." class="input-boxes" required="true">
+	<p class="subheader-text jgPara1">Email: </p><input type="email" name="Email" placeholder="Email..." class="input-boxes" required="true">
 
-	<p class="subheader-text">Password: </p> <input type="password" name="Password" placeholder="Password..." class="input-boxes" required="true">
+	<p class="subheader-text jgPara1">Password: </p> <input type="password" name="Password" placeholder="Password..." class="input-boxes" required="true">
 	<br><br>
 	<a class="switches subheader-text" data-role="switchForms" data-id="login"><u>Create an account.</u></a>
-	<input type="submit" class="submits subheader-text" value="Login">
+	<input type="submit" id="login-btn" class="submits subheader-text" value="Login">
 	</div>
 	<br><br>
 	</form>
 
 
 	<!-- Register -->
-	<form action="PHP/register.php" method="POST" id="register-form">
+	<form action="PHP/register.php" method="POST" id="register-form" enctype="multipart/form-data">
 	<?php if(isset($_GET['error'])){?>
 		<p class="error"><?php echo $_GET['error'];?>!</p>
 	<?php } ?>
@@ -76,27 +78,27 @@
 
 	<div class="input-password">
 	<p class="subheader-text" >Password : </p>
-	<span><input size="50" type="password" name="Password" placeholder="Password..." class="input-boxes" required="true"></span>
+	<span><input id="reg-password" size="50" type="password" name="Password" placeholder="Password..." class="input-boxes" required="true"></span>
 	</div>
 
 	<div class="input-firstname">
-	<p class="subheader-text" >First_Name : </p>
-	<span> <input size="50" type="text" name="First_Name" placeholder="First_Name..." class="input-boxes" required="true"></span>
+	<p class="subheader-text" >First Name : </p>
+	<span> <input size="50" type="text" name="First_Name"  id="reg-first" placeholder="First Name..." class="input-boxes" required="true"></span>
 	</div>
 
 	<div class="input-middlename">
-	<p class="subheader-text" >Middle Name : </p>
-	<span> <input size="50" type="text" name="Middle_Name" placeholder="Middle Name..." class="input-boxes" required="true"></span>
+	<p class="subheader-text" >Middle :</p>
+	<span> <input size="50" type="text" name="Middle_Name" id="reg-mid"  placeholder="Middle Name..." class="input-boxes" required="true"></span>
 	</div>
 
 	<div class="input-lastname">
-	<p class="subheader-text" >Last_Name : </p>
-	<span> <input size="50" type="text" name="Last_Name" placeholder="Last_Name..." class="input-boxes" required="true"></span>
+	<p class="subheader-text" >Last : </p>
+	<span> <input size="50" type="text" name="Last_Name" id="reg-last"  placeholder="Last Name..." class="input-boxes" required="true"></span>
 	</div>
 
 	<div class="input-age">
 	<p class="subheader-text" >Age : </p>
-	<span> <input size="50" type="number" name="Age" placeholder="Age..." class="input-boxes" required="true"></span>
+	<span> <input  maxlength="2" type="text" pattern="\d*" id="reg-age" name="Age" placeholder="Age..." class="input-boxes" required="true"></span>
 	</div>
 
 	<div class="input-address">
@@ -120,7 +122,7 @@
 
 	<div class="input-occupation">
 	<p class="subheader-text" >Occupation : </p>
-	<span> <input type="text" name="Occupation" placeholder="Occupation..." class="input-boxes" required="true"></span>
+	<span> <input type="text" name="Occupation" id="reg-occupation" placeholder="Occupation..." class="input-boxes" required="true"></span>
 	</div>
 
 	<div class="input-branch" required="true">
@@ -129,27 +131,32 @@
         <option value=""></option>
         <option value="Cupang">Cupang</option>
         <option value="Paranaque">Paranaque</option>
-		<option value="Makati">Makati</option>
+		<option value="Taguig">Taguig</option>
     </select></span>
     </div>
 
     <div class="input-civilstatus">
-	<p class="subheader-text" >Civil Status : </p>
-	<span> <input type="text" name="Civil_Status" placeholder="Civil_Status..." class="input-boxes" required="true"></span>
+	<p class="subheader-text" > Civil Status : </p>
+	<span><select name="Civil_Status" class="input-boxes" required="true">
+        <option value=""></option>
+        <option value="Single">Single</option>
+        <option value="Married">Married</option>
+    </select></span>	
 	</div>
 
 	<div class="input-contactno">
 	<p class="subheader-text" >Contact No. : </p>
-	<span><input type="text" name="Contact_No" pattern="\d*" maxlength="11" minlength="11" placeholder="11 Digit number" class="input-boxes" required="true"></span>
+	<span><input type="text" name="Contact_No" pattern="\d*" id="reg-no" maxlength="11" minlength="11" placeholder="11 Digit number" class="input-boxes" required="true"></span>
 	</div>
 
 	<div class="input-image">
 	<p class="subheader-text" >Image : </p>
-	<span> <input type="file" id="avatar" name="Image" accept="image/png, image/jpeg"></span>
+	<span> <input type="file" id="avatar" required name="Image"></span>
 	</div>
+
 	<div class="input-submitbtn">
 		<a class="switches subheader-text" data-role="switchForms" data-id="register"><u>Already have an account? Login.</u></a>
-	<input type="submit" class="submits subheader-text" value="Register">
+	<input type="submit" id="register-btn" class="submits subheader-text" value="Register">
 	</div>
 	<br><br>
 
@@ -157,6 +164,7 @@
 	</div>
 
 	</div>
+	
 </body>
 <!-- 
 	<div id="top-bar">

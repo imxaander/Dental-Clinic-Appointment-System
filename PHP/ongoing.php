@@ -29,15 +29,7 @@ if (isset($_POST["Appointment_Id"])) {
 
                   if ($resultw) {
                     echo "notified";
-                    $sql = "SELECT * FROM appointments WHERE Appointment_Id = '$Appointment_Id'";
-                    $resultC = mysqli_query($con, $sql);
-                    while ($row3 = mysqli_fetch_array($resultC)) {
-                      date_default_timezone_set('Asia/Manila');
-                      $ntime = date("h:i A", strtotime($row3["Time"]." + 0 hours"));
-                      $ytime = date("h:i A", strtotime($row3["Time"]." + ".$row3["Duration"]));
-                      $etime = date("h:i A", strtotime($ytime." + 0 hours"));
-                      echo $etime;
-                      header('Location: /quickstart.php?Name='.$Patient_Id.'&Service='.$row3["Service"].'&STime='.$ntime.'&ETime='.$etime.'&Date='.$row3["Date"].'&Branch='.$row3["Branch"].'');
+                    
                   }
                   }else{
                     echo "There is something wrong with adding shits";
@@ -48,11 +40,11 @@ if (isset($_POST["Appointment_Id"])) {
   }else{
       return;
   }
-}
+
 
 if(isset($_GET["uwu"])){
   echo "uwu";
-  
+
   $Appointment_Id = $_GET["uwu"];
 
     $sql = "SELECT * FROM appointments WHERE Appointment_Id = '$Appointment_Id'";
@@ -79,15 +71,6 @@ if(isset($_GET["uwu"])){
 
                     if ($resultw) {
                       echo "notified";
-                      $sql = "SELECT * FROM appointments WHERE Appointment_Id = '$Appointment_Id'";
-                      $resultC = mysqli_query($con, $sql);
-                      while ($row3 = mysqli_fetch_array($resultC)) {
-                        date_default_timezone_set('Asia/Manila');
-                        $ntime = date("h:i A", strtotime($row3["Time"]." + 0 hours"));
-                        $ytime = date("h:i A", strtotime($row3["Time"]." + ".$row3["Duration"]));
-                        $etime = date("h:i A", strtotime($ytime." + 0 hours"));
-                        header('Location: /quickstart.php?Name='.$Patient_Id.'&Service='.$row3["Service"].'&STime='.$ntime.'&ETime='.$etime.'&Date='.$row3["Date"].'&Branch='.$row3["Branch"].'');
-                        
                     }
                     }else{
                       echo "There is something wrong with adding shits";
@@ -98,7 +81,7 @@ if(isset($_GET["uwu"])){
     }else{
         return;
     }
-}
+
 /*
 http://localhost/quickstart.php?Name=PT6176b04ec2a18&Service=Tooth%20Extraction%20(bunot)&STime=10:00&ETime=14:00&Date=2021-11-18&Branch=J%20Gonzales%20Dental%20Center
 */

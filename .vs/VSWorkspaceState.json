@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PHP"
+    "\\PHP",
+    "\\scripts",
+    "\\styles"
   ],
-  "SelectedNode": "\\quickstart.php",
+  "SelectedNode": "\\styles\\indexstylespc.css",
   "PreviewInSolutionExplorer": false
 }

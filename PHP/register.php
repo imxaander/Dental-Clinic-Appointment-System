@@ -9,11 +9,11 @@ require_once ('PHPMailer\PHPMailerAutoload.php');
 
 
 
-if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['First_Name']) && isset($_POST['Last_Name']) && isset($_POST['Age']) && isset($_POST['Date_of_Birth']) && isset($_POST['Gender']) && isset($_POST['Occupation']) && isset($_POST['Branch']) && isset($_POST['Civil_Status']) && isset($_POST['Contact_No']) && isset($_POST['Verified']) && isset($_POST["Middle_Name"]))
+if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['First_Name']) && isset($_POST['Last_Name']) && isset($_POST['Age']) && isset($_POST['Date_of_Birth']) && isset($_POST['Gender']) && isset($_POST['Occupation']) && isset($_POST['Branch']) && isset($_POST['Civil_Status']) && isset($_POST['Contact_No']) && isset($_POST['Verified']) && isset($_POST["Middle_Name"]) && isset($_FILES["Image"]))
 {
 
     $Patient_Id = validate($_POST["Patient_Id"]);
-    $Verified = validate($_POST["Verified"]);
+    $Verified = '0';
     $Email = validate($_POST["Email"]);
     $Password = validate($_POST["Password"]);
     $First_Name = validate($_POST["First_Name"]);
@@ -28,6 +28,12 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
     $Civil_Status = validate($_POST["Civil_Status"]);
     $Contact_No = validate($_POST["Contact_No"]);
     $chat_id = uniqid("CT");
+
+    $imageFileName = $_FILES["Image"]["name"];
+    $imageTempName = $_FILES["Image"]["tmp_name"];
+    $folder = "../img/patients/".$imageFileName;
+    
+    
 
     if (empty($Email))
     {
@@ -121,11 +127,12 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
         else
         {
             $vcode = VCode();
-            $sql = "INSERT INTO patients(Patient_Id, Verified, vcode, Email, Password, First_Name, Middle_Name, Last_Name, Age, Date_of_Birth, Gender, Occupation, Branch, Address, Civil_Status, Contact_No, chat_id) VALUES('$Patient_Id', '$Verified', '$vcode', '$Email', '$Password', '$First_Name', '$Middle_Name', '$Last_Name', '$Age', '$Date_of_Birth', '$Gender', '$Occupation', '$Branch', '$Address', '$Civil_Status', '$Contact_No', '$chat_id')";
+            $sql = "INSERT INTO patients(Patient_Id, Verified, vcode, Email, Password, First_Name, Middle_Name, Last_Name, Age, Date_of_Birth, Gender, Occupation, Branch, Address, Civil_Status, Contact_No, Image, chat_id) VALUES('$Patient_Id', '$Verified', '$vcode', '$Email', '$Password', '$First_Name', '$Middle_Name', '$Last_Name', '$Age', '$Date_of_Birth', '$Gender', '$Occupation', '$Branch', '$Address', '$Civil_Status', '$Contact_No','$imageFileName', '$chat_id')";
             $result = mysqli_query($con, $sql);
             if ($result)
             {
-
+                move_uploaded_file($imageTempName, $folder);
+                
                 $url = "http://" . $_SERVER['SERVER_NAME'] . "/PHP/verify.php?vcode=" . $vcode;
 
                 $subject = 'Verify your account for J. Gonzales Clinic';
@@ -210,14 +217,14 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
                     $notif_time = date("h:i A");
                     $notif_date = date("Y-m-d");
                     $viewed = "0";
-                    $sql = "INSERT INTO notifications(notif_id, patient_id, notif_title, notif_desc, time, date, viewed) VALUES('$notif_id', '$Patient_Id', '$notif_title', '$notif_desc', '$notif_time', '$notif_date', '$viewed' )";
+                    $sql = "INSERT INTO notifications(notif_id, patient_id, notif_title, notif_desc, time, date, viewed) VALUES('$notif_id', '$Patient_Id', '$notif_title', '$notif_desc', '$notif_time', '$notif_date', '$viewed')";
                     $result = mysqli_query($con, $sql);
 
                     if ($result) {
                       header("Location: ../login_page.php?success=Your account has been successfully created. Please check your email for verification link.");
                       exit();
                     }else{
-                      echo "There is something wrong with adding shits";
+                      echo "There is something wrong with adding shits" . $mysqli -> error;
                     }
 
                 }
@@ -225,8 +232,8 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
             }
             else
             {
-
-                header("Location: ../register_page.php?error=Unknown error occured, please try again.");
+                
+                header("Location: ../login_page.php?error=Unknown error occured, please try again. 001");
                 exit();
 
             }
@@ -234,8 +241,10 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
     }
 }
 else
-{
-    header("Location: ../register_page.php?error=Error Occured, Please try again.");
+{   
+    
+    header("Location: ../login_page.php?error=Error Occured, Please try again.".$_FILES);
+    
     exit();
 }
 

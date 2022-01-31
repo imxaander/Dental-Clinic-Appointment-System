@@ -6,13 +6,13 @@
     display: block;
   }
 }*/
-.insertapp-input-div{
-  height: 500px;
-}
+
+
 #notifications{
   display: none;
 }
 @media all and (max-width: 740px){
+
   #darkenSvc{
       background-color: rgba(0,0,0,0.5);
 
@@ -70,13 +70,11 @@ margin-left:  10px;
     body{
         font-family: 'News Cycle';
     }
-
     #head-icon{
-
-      display: block;
-margin-left: auto;
-margin-right: auto;
-height: 10%;
+       display: block;
+       margin-left: auto;
+       margin-right: auto;
+       height: 10%;
     }
     #top-bar{
         position: sticky;
@@ -86,7 +84,6 @@ height: 10%;
         color: #caf0f8;
         z-index: 2;
         display: block;
-
     }
     #top-bar-pc{
       position: sticky;
@@ -100,14 +97,12 @@ height: 10%;
     #top-bar p{
         font-size: 1rem;
         margin: 0;
-
     }
     #menu-btn{
         font-size:  40px;
         padding-left:5px ;
         padding-bottom: 5px;
         padding-top: 5px;
-
     }
     #user-pic-bar{
         font-size:  40px;
@@ -126,11 +121,8 @@ height: 10%;
         overflow: auto;
         transition: width .5s;
         z-index: 5;
-
     }
     .tablinks{
-
-
         text-decoration: none;
         color: black;
         font-size: 20px;
@@ -138,25 +130,13 @@ height: 10%;
         width: 100%;
         text-indent: 7px;
         color:#00b4d8;
-
-
-
     }
     .tablinkspc{
-
-
         text-decoration: none;
         color: white;
         font-size: 20px;
-
         width: 100%;
         text-indent: 7px;
-
-
-
-
-
-
     }
 
     #side-bar-head{
@@ -246,8 +226,9 @@ height: 10%;
       padding-bottom: 5px;
 
     }
+
     #appformheadertext{
-    font-size: 25px;
+    font-size: 40px;
     color: white;
     padding: 0;
     margin: 0;
@@ -267,7 +248,7 @@ height: 10%;
         top: 10%;
         margin: 0;
         padding: 0;
-        overflow-y: scroll;
+        overflow-y: auto;
         display: none;
         /*width: 80%;
         position: fixed;
@@ -275,6 +256,7 @@ height: 10%;
         left: 20%;
         display: block;*/
     }
+
     .collapsible {
         background-color: #0077b6;
         color: white;
@@ -285,13 +267,10 @@ height: 10%;
         text-align: left;
         outline: none;
         font-size: 15px;
-
         width: 90%;
         position: relative;
         margin-left: 5%;
         z-index: 1;
-
-
       }
 
       .content {
@@ -302,10 +281,7 @@ height: 10%;
         border-bottom-left-radius: 25px;
         border-bottom-right-radius: 25px;
         width: 90%;
-
-
-
-margin-left: 5%;
+        margin-left: 5%;
       }
       #appinsert-btn{
         font-size:  40px;
@@ -349,7 +325,7 @@ margin-left: 5%;
 
       }
       .logo{
-        font-family: 'Clicker Script';
+
         text-align:  center;
         margin: 0;
         padding: 0;
@@ -397,39 +373,67 @@ margin-left: 5%;
         color: white;
         margin: 0;
         box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
-        position: fixed;
-        bottom: 10%;
+
+
         z-index: 3;
+
+        cursor: pointer;
+      }
+      #opencalendarbtn{
+        font-size: 40px;
+        background-color: #00b4d8;
+        padding: 10px;
+        border-radius: 57%;
+        color: white;
+        margin: 0;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+        z-index: 3;
+        cursor: pointer;
+      }
+      #closemessagesbtn{
+        font-size: 30px;
+        padding-right: 10px;
+        color: white;
+        cursor: pointer;
+      }
+      #menubtns{
+        position: fixed;
+        height: 10%;
+        bottom: 20%;
         right: 5%;
       }
+
       #closemessagesbtn{
         font-size: 30px;
         padding-right: 10px;
         color: white;
       }
       #message_content{
-        width: 70%;
-        border-radius: 5px;
-        padding: 0px;
+        width: 85%;
+        height: 40px;
         margin: 0px;
-
-
       }
       #send_message_btn{
-        font-size: 30px;
-        margin: 0px;
-        padding: 0px;
+        font-size: 15px;
+        height:40px;
         color: #00b4d8;
-        padding-bottom : 10px;
+        background-color: white;
+        border: none;
+        float: right;
+        width: 10%;
+        border-radius: 25px;
       }
       #send_message_form{
         margin: 0px;
-        padding: 0px;
-
-
+      }
+      #send_type{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        background-color: #00b4d8;
       }
       .Patient_Message{
-        max-width: 80%;
+        max-width: 50%;
         background-color:	#00b4d8 ;
         color: white;
         border-radius: 25px;
@@ -454,7 +458,123 @@ margin-left: 5%;
         text-indent: 20px;
         white-space: normal;
       }
+    #notification-container {
+        width: 100%;
+        margin: 0 auto;
+        box-shadow: 0 0 50px #ccc;
+        height: 80%;
+        overflow-y: scroll;
+    }
 
+    .notif {
+        padding: 10px;
+        padding-bottom: 30px;
+    }
 
+    .notif-desc {
+        text-indent: 5px;
+    }
+
+    .notif-td {
+        font-size: 15px;
+        float: right;
+    }
+    .awards {
+
+    }
+    .feedbacks {
+        padding: 5px;
+        border-style: solid;
+        border-radius: 20px;
+        display: inline-block;
+    }
+    .feedbacks img {
+        width: 100px;
+        border-radius: 50%;
+    }
+
+    .feedback-content {
+        text-align: center;
+        border-left: solid;
+        margin: 10px;
+    }
+    .award-img {
+      width: 20%;
+      display: inline-block;
+      padding: 20px;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+  }
+  #award-list {
+      position: relative;
+      width: 80%;
+      left: 10%;
+      overflow: auto;
+      white-space: nowrap;
+      cursor: grab;
+  }
+  #award-view {
+      position: fixed;
+      top: 0;
+      width:50%;
+      left: 25%;
+      max-height: 90%;
+      top: 5%;
+      z-index: 4;
+      margin-left: auto;
+      margin-right: auto;
+      display: none;
+  }
+  .branchLocations{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 90%;
+    position: relative;
+    left: 5%;
+    border-style: solid;
+    column-gap: 20px;
+    padding:20px;
+  }
+  .branchImg{
+    width: 99%;
+  }
+
+  .branch-maps{
+  width: 100%;
+  }
+  .branchLocations div{
+    border-style: solid;
+  }
+  #pqueBranchInfo{
+    border-color: #00b4d8;
+
+  }
+  #pqueBranchInfo div{
+    border-color: #00b4d8;
+    margin:0px;
+    padding:0px;
+  }
+  #cupangBranchInfo{
+    border-color: white;
+
+  }
+  #cupangBranchInfo div{
+    border-color: white;
+    padding-left: -10px;
+
+  }
+  .service-titles-small {
+    position: relative;
+    top: 90%;
+    transform: translateY(-50%);
+    background-color: rgb(255 255 255 / 0.44)
+}
+.service-details-container {
+    background-color: white;
+    text-align: justify;
+    padding: 10px;
+    background-color: rgb(255 255 255 / 0.44)
+}
 
 }

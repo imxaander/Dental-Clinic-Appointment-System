@@ -15,10 +15,10 @@ if (mysqli_num_rows($result) > 0) {
     <div class="Patient_Message Message">
 
 
-    <p style="font-size: 10px; padding-top: 5px; padding-bottom: 0px;"><?php echo $row["display_name"] ?></p>
-    <p style="text-align: justify;"><?php echo $row['message_content'] ?></p>
+    <p class="message-content-name jgPara3"><?php echo $row["display_name"] ?></p>
+    <p class="message-content-body jgPara2"><?php echo $row['message_content'] ?></p>
 
-    <p style="font-size: 10px; padding-bottom: 5px; padding-top: 0px;"><?php if (date("Y-m-d",$row["timestamp"]) == date("Y-m-d")) {
+    <p class="message-content-timestamp jgPara3"><?php if (date("Y-m-d",$row["timestamp"]) == date("Y-m-d")) {
       echo 'Today, ';
     }elseif (date("Y-m-d", $row["timestamp"]) == date("Y-m-d", strtotime("-1 days"))){
       echo 'Yesterday, ';
@@ -33,10 +33,10 @@ if (mysqli_num_rows($result) > 0) {
     <div class="Staff_Message Message">
 
 
-    <p style="font-size: 10px; padding-top: 5px; padding-bottom: 0px;"><?php echo $row["display_name"] ?></p>
-    <p style="text-align: justify;"><?php echo $row['message_content'] ?></p>
+    <p class="message-content-name jgPara3"><?php echo $row["display_name"] ?></p>
+    <p class="message-content-body jgPara2" jgPara1><?php echo $row['message_content'] ?></p>
 
-    <p style="font-size: 10px; padding-bottom: 5px; padding-top: 0px;"><?php if (date("Y-m-d",$row["timestamp"]) == date("Y-m-d")) {
+    <p class="message-content-timestamp jgPara3"><?php if (date("Y-m-d",$row["timestamp"]) == date("Y-m-d")) {
       echo 'Today, ';
     }elseif (date("Y-m-d", $row["timestamp"]) == date('Y-m-d', strtotime("-1 days"))){
       echo 'Yesterday, ';

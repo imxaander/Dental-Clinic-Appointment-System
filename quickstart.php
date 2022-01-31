@@ -81,53 +81,7 @@ $events = $results->getItems();
 // https://developers.google.com/calendar/quickstart/php
 // Change the scope to Google_Service_Calendar::CALENDAR and delete any stored
 // credentials.
-if (isset($_GET["Name"]) || isset($_GET["Service"]) || isset($_GET["STime"]) || isset($_GET["ETime"]) || isset($_GET["Date"]) || isset($_GET["Branch"])) {
 
-  $esr = $_GET["Name"];
-
-  #quereie
-
-  $sql = "SELECT * FROM patients WHERE Patient_Id = '$esr'";
-  $result = mysqli_query($con, $sql);
-
-  
-  while($row = mysqli_fetch_array($result)){
-    $DEmail = $row["Email"];
-    $DFname = $row["First_Name"];
-    $DLname = $row["Last_Name"];
-  }
-
-  $DService = $_GET["Service"];
-  $DSTime = $_GET["STime"];
-  $DETime = $_GET["ETime"];
-  $DDate = $_GET["Date"];
-  $DBranch = $_GET["Branch"];
-
-  date_default_timezone_set('Asia/Manila');
-  $event = new Google_Service_Calendar_Event(array(
-    'summary' => $DService . "Service",
-    'location' => 'J Gonzales Dental Center '.$DBranch.' Branch',
-    'description' => 'An appointment at J Gonzales Dental Center. imxaander xd',
-    'start' => array(
-      'dateTime' => date("c", strtotime($DDate." ".$DSTime)),
-      'timeZone' => 'Asia/Manila',
-    ),
-    'end' => array(
-      'dateTime' => date("c", strtotime($DDate." ".$DETime)),
-      'timeZone' => 'Asia/Manila',
-    ),
-    'recurrence' => array(
-      'RRULE:FREQ=DAILY;COUNT=1'
-    ),
-    'attendees' => array(
-      array('email' => $DEmail, 'displayName' => "'. $DFname . ' '. $DLname''"),
-    ),
-
-  ));
-
-  $calendarId = 'primary';
-  $event = $service->events->insert($calendarId, $event);
-  echo "uwu done";
 
   //emails when appointment is approved... no fuck off
 
@@ -202,9 +156,7 @@ if (isset($_GET["Name"]) || isset($_GET["Service"]) || isset($_GET["STime"]) || 
                 $mail->Subject = $subject;
                 $mail->Body = $message;
   */
-}else{
-  echo "no get method";
-}
+
 
 
 

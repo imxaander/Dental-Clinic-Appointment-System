@@ -1,0 +1,10 @@
+#top-bar {
+    background-color: #00b4d8;
+    padding: 1px;
+    font-family: 'News Cycle';
+    text-align: center;
+}
+body {
+    font-family: 'News Cycle';
+    color: black;
+}

@@ -1,5 +1,5 @@
 function openSideBar() {
-  if ($(window).width() < 700) {
+  if ($(window).width() < 740) {
     document.getElementById("side-bar").style.width = "70%";
     document.getElementById("darken").style.display = "block";
 
@@ -16,9 +16,24 @@ function closeSideBar() {
     document.getElementById("side-bar").style.width = "0%";
     document.getElementById("darken").style.display = "none";
     document.getElementById('appinsert').style.display = "none";
+
+    let cal = !! document.getElementById('calendar');
+    if (cal) {
+        document.getElementById('calendar').style.display = "none";
+        console.log(cal);
+    }
+
+    let extappf = !! document.getElementById('extappinsert');
+    if (extappf) {
+      document.getElementById('extappinsert').style.display = "none";
+        console.log(extappf);
+    }
+
+
     if (document.getElementById('message_container')) {
       document.getElementById('message_container').style.display = "none";
     }
+    let awardImgPrev = document.getElementById("award-view").style.display = "none";
 
     var elems = document.getElementsByClassName('services-big');
 for (var i=0;i<elems.length;i+=1){
@@ -143,4 +158,47 @@ document.getElementById('Home').style.display = 'grid';
 }
 function registertocontinue(){
   window.location.replace("/login_page.php?error=Register to Book an Appointment");
+}
+
+function openExtAppInsert(){
+  document.getElementById('darken').style.display = "block";
+  document.getElementById('extappinsert').style.display = "block";
+}
+function ProfilePatient() {
+    window.open('about:blank', 'popup', 'width=400,height=400')
+    document.getElementById('PatientProfile').submit();
+}
+
+function ProfileGuest() {
+    window.open('about:blank', 'popup', 'width=400,height=400')
+    document.getElementById('GuestProfile').submit();
+    console.log(document.getElementById('GuestProfile'))
+}
+
+function updateGuestProfiles() {
+    var extidInput = document.getElementById('extid');
+    var pprofileInput = document.getElementById('pprofileInput');
+    pprofileInput.value = extidInput.value;
+    console.log("hi")
+}
+
+
+function openNotification(){
+  var notifDiv = document.getElementById('Notifications');
+  let notifDivF = notifDiv.style.display;
+  if(notifDivF == 'block'){
+    notifDiv.style.display = 'none';
+
+  }else{
+    notifDiv.style.display = 'block';
+
+  }
+
+
+}
+function clearFilters(){
+  document.querySelector('.filterinputs').value = '';
+  document.querySelector('.datefilter').value = '';
+  document.querySelector('.timefilter').value = '';
+  console.log("Filters Cleared.")
 }

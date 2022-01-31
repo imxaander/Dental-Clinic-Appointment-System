@@ -1,10 +1,10 @@
 <?php
 include "../includes/con_db.inc.php";
 
-if (isset($_POST["Appointment_Id"]) && isset($_POST["Duration"]) &&isset($_POST["Patient_Id"]) && isset($_POST["Cost"]) && isset($_POST["Service"]) && isset($_POST["Medical_History"]) && isset($_POST["Time"]) && isset($_POST["Date"]) &&  isset($_POST["Message"]) &&  isset($_POST["Branch"])) {
+if (isset($_POST["Appointment_Id"])  && isset($_POST["Patient_Id"]) && isset($_POST["Service"]) && isset($_POST["Medical_History"]) && isset($_POST["Time"]) && isset($_POST["Date"]) &&  isset($_POST["Message"]) && isset($_POST["Branch"])) {
     $Appointment_Id = $_POST["Appointment_Id"];
     $Patient_Id = $_POST["Patient_Id"];
-    $Cost = $_POST["Cost"];
+
     $Service = $_POST["Service"];
     $Medical_History = $_POST["Medical_History"];
     $Time = $_POST["Time"];
@@ -13,6 +13,7 @@ if (isset($_POST["Appointment_Id"]) && isset($_POST["Duration"]) &&isset($_POST[
     $Branch = $_POST["Branch"];
     $Message = $_POST["Message"];
     $Duration = $_POST["Duration"];
+    $Appointment_Type = "Onsite";
 
     if (empty($Appointment_Id))
     {
@@ -21,10 +22,6 @@ if (isset($_POST["Appointment_Id"]) && isset($_POST["Duration"]) &&isset($_POST[
     }else if (empty($Patient_Id))
     {
         header("Location: /index.php?error=Error occured. Please try logging in again.ptid");
-        exit();
-    }else if (empty($Cost))
-    {
-        header("Location: /index.php?error=Error occured. Please try logging in again.cost");
         exit();
     }else if (empty($Service))
     {
@@ -50,10 +47,6 @@ if (isset($_POST["Appointment_Id"]) && isset($_POST["Duration"]) &&isset($_POST[
     {
         header("Location: ../index.php.php?error=Error occured. Please try logging in again.brancher");
         exit();
-    }else if (empty($Duration))
-    {
-        header("Location: ../index.php.php?error=Error occured. Please try logging in again.durationer");
-        exit();
     }else{
         $sql="SELECT * FROM appointments WHERE Patient_Id = '$Patient_Id' AND Status != 'Canceled'";
     $result = mysqli_query($con, $sql);
@@ -62,11 +55,10 @@ if (isset($_POST["Appointment_Id"]) && isset($_POST["Duration"]) &&isset($_POST[
         header("Location: ../index.php?success=You have already maximum appointment for your account. Please");
        exit();
     }else{
-        $sql = "INSERT INTO appointments(Appointment_Id, Patient_Id, Cost, Service, Medical_History, Time, Date, Status, Branch, Message, Duration) VALUES('$Appointment_Id', '$Patient_Id', '$Cost', '$Service', '$Medical_History', '$Time', '$Date', '$Status', '$Branch', '$Message', '$Duration')";
+        $sql = "INSERT INTO appointments(Appointment_Id, Patient_Id, Service, Medical_History, Time, Date, Status, Branch, Message, type, duration) VALUES('$Appointment_Id', '$Patient_Id', '$Service', '$Medical_History', '$Time', '$Date', '$Status', '$Branch', '$Message', '$Appointment_Type', '$Duration')";
         $result = mysqli_query($con, $sql);
    if ($result) {
      date_default_timezone_set('Asia/Manila');
-
                  $notif_id = uniqid('NT');
                  $notif_title = "Your appointment has been <b>Posted</b>";
                  $notif_desc = "Appointment(". $Appointment_Id .")has been posted. Please wait for approval and check your messages for concern.";
@@ -85,7 +77,9 @@ if (isset($_POST["Appointment_Id"]) && isset($_POST["Duration"]) &&isset($_POST[
        header("Location: ../index.php?success=Appointment Added. Please Wait for some changes within the day. Thank you!");
        exit();
    }else{
-       header("Location: ../index.php");
+       #header("Location: ../index.php?error=damn");
+       echo mysqli_error($con);
+       echo "gehres";
        exit();
    }
     }
