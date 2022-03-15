@@ -25,7 +25,11 @@ if (isset(($_POST["Branch"]))) {
         }
         elseif ($row["Status"] == "Done")
         {
-            echo '<span style="color: Green">' . $row["Status"] . "</span>";
+            echo '<span style="color: #32CD32">' . $row["Status"] . "</span>";
+        }
+        elseif ($row["Status"] == "Alert")
+        {
+            echo '<span style="color: Orange">' . $row["Status"] . "</span>";
         }
         else
         {
@@ -46,7 +50,7 @@ if (isset(($_POST["Branch"]))) {
       while ($row = mysqli_fetch_array($result))
       { ?>
 
-                  <div type="button" class="collapsible" data-role="loadinfopatient" data-id="<?php echo $row["Appointment_Id"] ?>"><?php echo $row["Service"]; ?> | <?php echo $row["Date"]; ?> , <?php echo $row["Time"]; ?> | Status :
+                  <div type="button" class="collapsible" data-role="loadinfopatient" data-id="<?php echo $row["Appointment_Id"] ?>"><?php echo $row["Service"]; ?> | <?php echo $row["Date"]; ?> , <?php echo $row["Time"]; ?> | Branch : <?php echo $row["Branch"] ?> | Status :
           <?php if ($row["Status"] == "Pending")
           {
               echo '' . $row["Status"] . "";
@@ -63,6 +67,10 @@ if (isset(($_POST["Branch"]))) {
           {
               echo '' . $row["Status"] . "";
           }
+          elseif ($row["Status"] == "Alert")
+        {
+            echo '' . $row["Status"] . "";
+        }
           else
           {
               echo "Unable to get status";

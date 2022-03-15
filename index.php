@@ -3,6 +3,7 @@ include "includes/con_db.inc.php";
 session_start();
 $Patient_Id = $_SESSION["Patient_Id"] ?? "";
 $Branch = $_SESSION["Branch"] ?? "";
+
 $debugging = true;
 if($debugging == true){
   error_reporting(0);
@@ -14,7 +15,6 @@ if ($_SESSION["Verified"] == "0")
     session_destroy();
     header("Location: /login_page.php?error=Please check your email and click the link from us to verify. Check your spam if necessary.");
     exit();
-
 }
 else
 {
@@ -45,8 +45,8 @@ else
 <script src="scripts/slideshow.js"></script>
 <script src="scripts/indexscripts.js"></script>
 <script type="text/javascript" src="scripts/minigallery.js"></script>
-  
 
+<script src="https://malsup.github.io/jquery.form.js"></script>
 
 <script src="https://kit.fontawesome.com/6b9c8a6e93.js"></script>
 
@@ -163,25 +163,27 @@ else
         if(isset($_SESSION["Staff_Id"]))
         {?>
 
-        <?php 
-        }else{ 
+        <?php
+        }else{
           ?>
 
         <a class="tablinkspc appinsertbtnpc clrefresh"  style="
         background-color: black;
-        padding: 10px;
+        padding: 5px;
         float: right;
         width: 150;
-        margin-top: -10px;
+        color: #00b4d8;
+        background-color: white;
+        margin-top: -5px;
         margin-right: 1%;"onclick="<?php
           if(!empty($_SESSION["Email"])){
           echo 'openappinsert()';
         }else{
           echo 'registertocontinue()';
-        } ?>" 
-        id="" 
+        } ?>"
+        id=""
         href="#">
-        <i class="fas fa-book"></i>Book Now!
+        <i class="fas fa-book"></i> Book Now!
         </a>
 
     <?php }?>
@@ -202,11 +204,12 @@ else
         <!-- topbar mobile logostart -->
       <div class="logo">
         <h1>J Gonzales</h1>
+        <h1>Dental Center</h1>
       </div>
 
         <!-- topbar mobile class start -->
       <div id="top-bar" style="">
-        <p><i class="fas fa-bars" id="menu-btn" onclick="openSideBar()"></i>  
+        <p><i class="fas fa-bars" id="menu-btn" onclick="openSideBar()"></i>
         <span id="Page_Section" style="font-size: 34px;"></span><i class="fas fa-book" id="appinsert-btn" onclick="<?php if(!empty($_SESSION["Email"])){
         echo 'openappinsert()';
         }else{
@@ -218,11 +221,11 @@ else
 
 <!-- side bar  start-->
 <div id="side-bar">
-      
+
 <!-- side bar head which contains the little photo and name -->
   <div id="side-bar-head">
 
-    <?php 
+    <?php
     if (isset($_SESSION["Patient_Id"]))
     { ?>
             <div id="profile">
@@ -274,7 +277,7 @@ else
 
     <?php
     } ?>
-    
+
     <!-- if its a staff-->
     <?php if (isset($_SESSION["Staff_Id"]))
     { ?>
@@ -285,6 +288,8 @@ else
     <!-- if it does have an email, add logout-->
     <?php if (isset($_SESSION["Email"]))
     { ?>
+    <br>
+    <br>
         <a class="tablinks" href="PHP/logout.php" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a><br>
     <?php
     } ?>
@@ -294,25 +299,43 @@ else
 
 <!-- tabs starting div -->
 <div id="tabs">
-  
+
   <?php if (isset($_SESSION["Staff_Id"]))
   { ?>
     <div class="tabcontent" id="Staff_Panel">
+    <i class="fa fa-calendar" style="position:fixed; bottom: 5%; right:5%; "id="opencalendarbtn" onclick=""> </i>
     <input type="hidden" name="" id="Branch" value="<?php echo $_SESSION["Branch"] ?>">
 
   <?php  if (isset($_SESSION["Staff_Id"])) { ?>
-    
-    <button type="button" class="Staff_Btn" onclick="AppPanelOpen()">Appointments</button><button type="button" class="Staff_Btn" onclick="UserPanelOpen()">Patients</button><button type="button" class="Staff_Btn" onclick="StaffAccountOpen()">Staff Account</button>
+
+
+
+
+    <?php if($Branch !== 'All'){?>
+      <button type="button" class="Staff_Btn" onclick="AppPanelOpen()">Appointments</button>
+      <button type="button" class="Staff_Btn" onclick="UserPanelOpen()">Patients</button>
+      <button type="button" class="Staff_Btn" onclick="StaffAccountOpen()">Staff Account</button>
+    <?php }else{ ?>
+      <button type="button" class="Staff_Btn" onclick="AppPanelOpen()" style="width: 33%;">Appointments</button>
+      <button type="button" class="Staff_Btn"  style="width: 33%" onclick="UserPanelOpen()">Patients Info</button>
+      <button type="button" class="Staff_Btn" onclick="StaffAccountOpen()" style="width: 33%;">Staff Account</button>
+    <?php } ?>
+
 
     <!-- filter app-->
 
     <div id="filterApp">
     <p>Filters : </p>
-    <input  class="filterinputs" type="text" placeholder="Search..">
+    <input  class="filterinputs" type="text" id="filterinputt" placeholder="Search..">
     <input  class="datefilter" type="date"  placeholder="Search..">
     <input  class="timefilter" type="time"  placeholder="Search..">
     <button id="clear-filters" onclick="clearFilters()"> Clear Filters</button>
-    <input id="extAppAdd"type="button" value="Add an Appointment">
+    <?php
+      if($Branch != 'All'){
+        echo '<input id="extAppAdd"type="button" value="Add an Appointment">';
+      }
+    ?>
+
     <!-- filter app end -->
     </div>
   <?php } ?>
@@ -324,7 +347,7 @@ else
 
         <div class="AppInfo"> </div>
 
-  
+
   </div>
 
       <script>
@@ -356,6 +379,10 @@ else
 
 
 <!-- start of user panel-->
+<?php
+if($Branch != 'All'){?>
+
+
 <div id="UserPanel" class="tabcontent">
   <?php
     $query = "SELECT * FROM patients WHERE Branch = '$Branch'";
@@ -363,7 +390,7 @@ else
 echo "<table id='patient_panel_table'>";
 echo "<tr><th> First Name</th><th>Last_Name</th><th>Action</th></tr>";
 while($row = mysqli_fetch_array($result)){
-echo "<tr><td>" . $row['First_Name'] . "</td><td>" . $row['Last_Name'] . "</td><td>".'<i class="far fa-comments" data-role="send_message" data-id='. $row["chat_id"] . '> </i>'.'</td></tr>';  //$row['index'] the index here is a field name
+echo "<tr><td>" . $row['First_Name'] . "</td><td>" . $row['Last_Name'] . "</td><td>".'<i class="far fa-comments" data-role="send_message" data-id='. $row["chat_id"] . '> </i> <i class="fas fa-info-circle" data-role="viewProfileP" data-id='. $row["Patient_Id"] . '> </i>'.'</td></tr>';  //$row['index'] the index here is a field name
 }
 echo "</table>";  ?>
 
@@ -371,13 +398,78 @@ echo "</table>";  ?>
   <div id="message_container">
         <p align="center" style="font-size: 20px; color: white; background-color: #00b4d8; margin: 0; padding: 20; border-top-left-radius: 25px; border-top-right-radius: 25px; "><?php echo $_SESSION["Branch"] ?> Admin  <i class="far fa-times-circle" id="closemessagesbtn" onclick="closemessages()" style="float: right;"></i></p>
         <div id="message_history">
-              <i class="fas fa-spinner" style="font-size: 50px;"></i>
+        <img src="img/jgSpinner.svg"  class="jgLoading" alt="">
+        </div>
+    <form id="send_message_form" method="post">
+      <div id="send_type">
+        <textarea style="resize: none;" name="message_content" required="true" id="message_content"></textarea>
+        <div class="sendcenter"><label id="imagesendlabel" for="img_content">+</label></div>
+
+        <button type="button" id="send_message_btn"> send </button>
+
+
+      </div>
+
+      <input type="hidden" name="display_name" id="display_name" value="<?php echo $_SESSION['Branch']; ?> Staff">
+      <input type="hidden" name="chat_id" id="chat_id" value="<?php if(isset($_SESSION["chat_id"])){ echo $_SESSION["chat_id"];}?>">
+      <input type="hidden" name="author_id" id="author_id" value="<?php if (isset($_SESSION["Patient_Id"])) {
+      echo $_SESSION["Patient_Id"];
+      }elseif (isset($_SESSION["Staff_Id"])){
+      echo $_SESSION["Staff_Id"];
+      }else{
+      echo '';
+      } ?>">
+  </form>
+  <form id="send_image_form" method="post" enctype="multipart/form-data" action="PHP/sendimage.php">
+  <!--message form-->
+
+    <input type="file" name="message_content" required="true" id="img_content" style="display: none">
+
+
+    <input type="hidden" name="type" id="img_type" value="image">
+    <input type="hidden" name="message_id" id="img_id" value="<?php echo uniqid("MSG") ?>">
+    <input type="hidden" name="display_name" id="display_name" value="<?php echo $_SESSION['Branch']; ?> Staff">
+
+    <input type="hidden" name="chat_id" id="chat_ids" value="<?php echo $_SESSION["chat_id"] ?>">
+    <input type="hidden" name="author_id" id="author_id" value="<?php if (isset($_SESSION["Patient_Id"])) {
+      echo $_SESSION["Patient_Id"];
+    }elseif (isset($_SESSION["Staff_Id"])){
+      echo $_SESSION["Staff_Id"];
+    }else{
+      echo '';
+    } ?>">
+
+  </form>
+
+</div>
+        </div>
+
+<!-- end of userpanel or the patient's list -->
+
+<?php
+}else{?>
+<div id="UserPanel" class="tabcontent">
+  <?php
+    $query = "SELECT * FROM patients";
+    $result = mysqli_query($con, $query);
+echo "<table id='patient_panel_table'>";
+echo "<tr><th> First Name</th><th>Last_Name</th><th>Action</th></tr>";
+while($row = mysqli_fetch_array($result)){
+echo "<tr><td>" . $row['First_Name'] . "</td><td>" . $row['Last_Name'] . "</td><td>".'<i class="far fa-comments" data-role="send_message" data-id='. $row["chat_id"] . '> </i> <i class="fas fa-info-circle" data-role="viewProfileP" data-id='. $row["Patient_Id"] . '> </i>'.'</td></tr>';  //$row['index'] the index here is a field name
+}
+echo "</table>";?>
+
+<!-- message container -->
+  <div id="message_container">
+        <p align="center" style="font-size: 20px; color: white; background-color: #00b4d8; margin: 0; padding: 20; border-top-left-radius: 25px; border-top-right-radius: 25px; "><?php echo $_SESSION["Branch"] ?> Admin  <i class="far fa-times-circle" id="closemessagesbtn" onclick="closemessages()" style="float: right;"></i></p>
+        <div id="message_history">
+        <img src="img/jgSpinner.svg"  class="jgLoading" alt="">
         </div>
     <form id="send_message_form" method="post">
       <div id="send_type">
         <textarea style="resize: none;" name="message_content" required="true" id="message_content"></textarea>
         <button type="button" id="send_message_btn"> send </button>
-        
+        <div><label id="imagesendlabel" for="img_content">+</label></div>
       </div>
 
       <input type="hidden" name="display_name" id="display_name" value="<?php echo $_SESSION['Branch']; ?> Staff">
@@ -394,11 +486,18 @@ echo "</table>";  ?>
 
 </div>
         </div>
+
+<!-- end of userpanel or the patient's list -->
+
+<?php
+}
+?>
+
 <div id="StaffAccount" class="tabcontent">
-  <?php if ($_SESSION["Branch"] != 'All') { 
+  <?php if ($_SESSION["Branch"] != 'All') {
     echo "hi";
     ?>
-    
+
     <br>
 
             <div style="box-shadow: 0 0 25px rgba(0, 0, 0, 0.25); width: 90%; position:relative; left: 5%;" >
@@ -411,7 +510,7 @@ echo "</table>";  ?>
 
       <br>
   <?php }else{ ?>
-    
+
     <form class="" action="PHP/staffaccountcreate.php" method="post">
       Email :
       <input type="text" id="staffemailinput" value="">
@@ -488,12 +587,20 @@ tab contents
   text-justify: inter-word;" class="jgPara1">Our dental team at J Gonzales Dental Center aims to provide a positive experience at the dentist when our patients visit. We strive for the quality of care you receive must meet your personal standards of health and comfort. We guarantee to provide you with the utmost gentle care that you deserve, from routine procedures such as simple as  general cleaning to a complicated wisdom tooth surgery and provide every service with a smile. </p>
 
             <p style="text-indent: 50px; margin: 20px;" class="jgPara1">In this pandemic we are ensuring safe and effective oral care for patients coming from all walks of life. We provide quality treatments at an affordable price.</p>
+
             </div>
 
             <div class="fb-page-div">
             <div class="fb-page" data-href="https://www.facebook.com/jgonzalesdentalcenter" data-tabs="timeline" data-width="500" data-height="630px" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/jgonzalesdentalcenter" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/jgonzalesdentalcenter">J Gonzales Dental Center</a></blockquote></div>
             </div>
+  <br>
+            <div style="grid-area: fbttl">
+            <p class="jgTitles1" style="text-align:center; background-color: white;" id="feedback-title-p">Feedbacks</p>
+            </div>
+
             <div class="awards">
+
+
               <div class="feedbacks">
                 <div class="feedback-header" >
                   <p class="jgPara1"><b>Engrid Cenas</b></p>
@@ -535,9 +642,12 @@ tab contents
 
                 </div>
               </div>
+              <br>
             </div>
-            <br>
+
             <div class="info">
+              <br>
+            <p class="jgTitles1" style="text-align:center;">Branches</p>
               <br>
               <div id="info-container">
                   <div class="branch-infos">
@@ -660,7 +770,7 @@ tab contents
 
         <div class="tabcontent" id="Contact_Us">
 
-        <br>
+
         <div style="background-color:#71c7ec;">
         <br>
         <h3 style="text-align: center">Awards & Certificates</h3>
@@ -689,16 +799,19 @@ tab contents
                   </div>
 
                   <div>
-                  <img class="branchImg" src="https://media.discordapp.net/attachments/793749939430621194/932574664054702110/unknown.png?width=917&height=683">
+                  <img class="branchImg" src="https://cdn.discordapp.com/attachments/793749939430621194/932599479046123530/20210811_155845.jpg">
                   </div>
 
-                  <div>
-                  <h3> <b> <i class="fas fa-building"></i> Paranaque Branch </b></h3>
+                  <div style="display: table;  overflow: hidden;">
+                    <div class="branch-info-about" style="display: table-cell; vertical-align: middle;">
+                  <h3  align="center"> <b> <i class="fas fa-building"></i> Paranaque Branch </b></h3>
+                  <br>
                   <p> <i class="fas fa-clock"></i> 11:00 AM - 6:00 PM</p>
                   <p> <i class="fas fa-calendar-week"></i> Monday, Friday, Saturday, Sunday </p>
                   <p> <i class="fas fa-tty"></i> 8132584 </p>
                   <p> <i class="fas fa-map-marker-alt"></i> 248 Palanyag Road Brgy. San Dionisio Parañaque City </p>
-                  <a style="font-size: 30px;" href="https://www.facebook.com/jgonzalesdentalcenter/%22%3E<p><i class="fab fa-facebook-square"></i></p></a>
+                  <a  style="font-size: 30px; text-align:center;" href="https://www.facebook.com/jgonzalesdentalcenter/%22%3E"><p><i align="center" class="fab fa-facebook-square"></i></p></a>
+                    </div>
                   </div>
 
                 </div>
@@ -710,23 +823,30 @@ tab contents
 
                 <div class="branchLocations" id="cupangBranchInfo" >
 
-                <div>
-                <img class="branchImg" src="https://cdn.discordapp.com/attachments/793749939430621194/932599479046123530/20210811_155845.jpg">
-                </div>
-
-
-                <div >
-                <h3> <b> <i class="fas fa-building"></i> Muntinlupa Branch </b></h3>
-                  <p> <i class="fas fa-clock"></i> 11:00 AM - 6:00 PM</p>
-                  <p> <i class="fas fa-calendar-week"></i> Tuesday to Saturday </p>
-                  <p> <i class="fas fa-phone"></i> 09158420620 / 09224261426 </p>
-                  <p> <i class="fas fa-map-marker-alt"></i> 500-A Manuel L Quezon St. Cupang Muntinlupa City </p>
-                  <a style="font-size: 30px;" href="https://www.facebook.com/jgonzalesdentalcentermuntinlupa/%22%3E<p><i class="fab fa-facebook-square"></i><p></a>
-                </div>
 
                 <div>
                 <iframe class="branch-maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3863.867511491664!2d121.04796371352025!3d14.434797870904474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d10e089edb1d%3A0x588f74803c59bcde!2sJ%20Gonzales%20Dental%20Center%20Muntinlupa%20Branch!5e0!3m2!1sen!2sph!4v1642398375199!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
+
+                <div>
+
+                <img class="branchImg" src="https://media.discordapp.net/attachments/793749939430621194/932574664054702110/unknown.png?width=917&height=683">
+                </div>
+
+                <div style="display: table;  overflow: hidden;">
+                  <div style="display: table-cell; vertical-align: middle;">
+                <h3 align="center"> <b> <i class="fas fa-building"></i> Muntinlupa Branch </b></h3>
+                <br>
+                  <p> <i class="fas fa-clock"></i> 11:00 AM - 6:00 PM</p>
+                  <p> <i class="fas fa-calendar-week"></i> Tuesday to Saturday </p>
+                  <p> <i class="fas fa-phone"></i> 09158420620 / 09224261426 </p>
+                  <p> <i class="fas fa-map-marker-alt"></i> 500-A Manuel L Quezon St. Cupang Muntinlupa City </p>
+                  <a style="font-size: 30px; text-align:center;" href="https://www.facebook.com/jgonzalesdentalcentermuntinlupa/%22%3E"><p><i class="fab fa-facebook-square"></i><p></a>
+                  </div>
+                </div>
+
+
+
 
               </div>
               <br>
@@ -736,7 +856,8 @@ tab contents
                 </div>
 
 
-            <img src="" id="award-view">
+            <img src="" id="award-view" class="imgViews" onclick="closeSideBar()">
+            <img src="" id="img-view" class="imgViews" onclick="closeItself(this)">
 
         <?php if (isset($_SESSION["Patient_Id"]))
     { ?>
@@ -746,16 +867,12 @@ tab contents
   if (isset($Patient_Id)) {
   ?>
   <div id="menubtns">
- <a  style="color: white;" data-role="viewnotif" data-id="<?php echo $Patient_Id; ?>" id="opennotifpc" onclick="openNotification()"> <i class="far fa-bell" > </i> <span style="background-color: white; color: black; padding: 5px; border-radius: 6px;"><?php
-            $sql = "SELECT * FROM notifications WHERE viewed = '0' AND patient_id = '$Patient_Id' ";
-            $result = mysqli_query($con, $sql);
-
-             ?></span> </a>
-             <br><br>
+ <a  style="color: white;" data-role="viewnotif" data-id="<?php echo $Patient_Id; ?>" id="opennotifpc"  onclick="openNotification()"><i class="far fa-bell" style="text-indent: -4;"> </i>  </a>
+             <br>
 
             <i class="far fa-comments" id="openmessagesbtn" onclick="openmessages()"> </i>
             <br><br>
-            <i class="fa fa-calendar" id="opencalendarbtn" onclick=""> </i>
+            <i class="fa fa-calendar" id="opencalendarbtn" onclick=""></i>
 
   </div>
 
@@ -777,8 +894,10 @@ tab contents
 
 <div class="appointment_list">
   <div class="appointment-listing">
+  <img src="img/jgSpinner.svg"  class="jgLoading" alt="">
   </div>
   <div class="appointment-info">
+    Appointment Details
     <div style="margin: auto; width: 50%; ">
 <p align="center">Select an appointment to manage.</p>
     </div>
@@ -793,17 +912,39 @@ tab contents
   <div id="message_history">
 
 
-    <i class="fas fa-spinner" style="font-size: 50px;"></i>
+  <img src="img/jgSpinner.svg"  class="jgLoading" alt="">
 
 
   </div>
-  <form id="send_message_form" method="post">
+  <form id="send_message_form" method="post" enctype="multipart/form-data">
   <!--message form-->
   <div id="send_type">
     <textarea style="resize: none;" name="message_content" required="true" id="message_content"></textarea>
+    <div style="height:10" class="sendcenter"> <label for="img_content" id="imagesendlabel" >+</label> </div>
     <button type="button" id="send_message_btn"> send </button>
-  <div>
+
+      </div>
     <input type="hidden" name="message_id" id="message_id" value="<?php echo uniqid("MSG") ?>">
+    <input type="hidden" name="display_name" id="display_name" value="<?php echo $_SESSION['First_Name']; ?>">
+
+    <input type="hidden" name="chat_id" id="chat_id" value="<?php echo $_SESSION["chat_id"] ?>">
+    <input type="hidden" name="author_id" id="author_id" value="<?php if (isset($_SESSION["Patient_Id"])) {
+      echo $_SESSION["Patient_Id"];
+    }elseif (isset($_SESSION["Staff_Id"])){
+      echo $_SESSION["Staff_Id"];
+    }else{
+      echo '';
+    } ?>">
+
+  </form>
+
+  <form id="send_image_form" method="post" enctype="multipart/form-data" action="PHP/sendimage.php">
+  <!--message form-->
+
+    <input type="file" name="message_content" required="true" id="img_content" style="display:none;">
+
+    <input type="hidden" name="type" id="img_type" value="image">
+    <input type="hidden" name="message_id" id="img_id" value="<?php echo uniqid("MSG") ?>">
     <input type="hidden" name="display_name" id="display_name" value="<?php echo $_SESSION['First_Name']; ?>">
 
     <input type="hidden" name="chat_id" id="chat_id" value="<?php echo $_SESSION["chat_id"] ?>">
@@ -840,7 +981,7 @@ tab contents
         <div class="tabcontent" id="Notifications">
             <div id="notification-container" >
               <?php
-              $sql = "SELECT * FROM notifications WHERE patient_id = '$Patient_Id' ORDER BY date, time DESC";
+              $sql = "SELECT * FROM notifications WHERE patient_id = '$Patient_Id' ORDER BY date DESC, time DESC";
               $result = mysqli_query($con, $sql);
 
               while($row = mysqli_fetch_assoc($result)){ ?>
@@ -866,7 +1007,7 @@ tab contents
 <!-- insertapp -->
     <form action="PHP/insertapp.php" method="POST" id="appinsert" >
     <div id="appformheader">
-    <h3 class="jgTitles1"> Book an appointment</h3>
+    <h3 class="jgTitles1"> Book an Appointment</h3>
     </div>
       <input type="hidden" name="Appointment_Id" value="<?php echo uniqid("AP"); ?>">
 
@@ -874,7 +1015,7 @@ tab contents
 
  <input type="hidden" name="Branch" value="<?php echo $_SESSION["Branch"]; ?>">
 
-    <br>
+
       <div id="insertappslider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
     <div class="carousel-inner">
       <div class="carousel-item active insertapp-input-div">
@@ -903,10 +1044,10 @@ tab contents
           <div>
         </div>
         <p class="right-btns"> Preffered Date : <span><input type="date" id="dateinput"name="Date" min="<?php echo date("Y-m-d"); ?>"></span></p>
-        <p> Preffered Time :<select class="" name="Time" id="timeinput" id="svcs"> <option value=""></option> </select> </p>
+        <p classs="left-btns"> Preffered Time :<select class="" name="Time" id="timeinput" id="svcs"> <option value=""></option> </select> </p>
         <!-- <input type="time"  onchange="Time24()" name="Time" id="timeinput" min="10:00" max="17:00">  -->
         <br>
-    Calendar
+          <br>
      <!-- app form calendar -->
      <div id="calendar2"> </div>
      <br>
@@ -918,8 +1059,8 @@ medical history
 </button>
       </div>
       <div class="carousel-item insertapp-input-div">
-        <p> Medical History : <span><input type="text" id="medicalinput"name="Medical_History"></span></p>
-          <p> Message : <span><textarea type="text" name="Message" cols="50%"></textarea></span></p>
+        <p> Medical History : <span><input type="text" class="msg-txta"id="medicalinput"name="Medical_History"></span></p>
+          <p> Message : <span><textarea type="text" class="msg-txta" name="Message" cols="50%"></textarea></span></p>
           <input type="submit" name=""  class="right-btns insert-slides-btn"style="display: none;" id="appoint-btn"value="Appoint">
         <button class="insert-slides-btn"style="display: block;"  data-bs-target="#insertappslider" data-bs-slide="prev">
         Time and Date
@@ -941,6 +1082,8 @@ medical history
   </div>
   <br>
     </form>
+          <?php
+          if($Branch != 'All'){ ?>
 
     <!-- account creation to oncall appointments -->
     <form action="PHP/extappinsert.php" method="POST" id="extappinsert">
@@ -974,7 +1117,7 @@ medical history
             <input type="text" name="extaddress" required="true">
             <br><br>
             Branch :
-            Current Branch : <input type="text" name="extbranch" value="<?php echo $_SESSION['Branch'];?>">
+            Current Branch : <input type="text" name="extbranch" readonly value="<?php echo $_SESSION['Branch'];?>">
             <br><br>
             Service :
             <select class="" name="extservice" id="svcs" required="true">
@@ -1007,6 +1150,11 @@ medical history
             <input style="float: right;" type="submit" value="Add this.">
         </div>
     </form>
+    <?php
+          }
+          ?>
+
+
     <form method="post" target="popup" id="GuestProfile" style="display:none" action="profile.php" >
 <input type="hidden" id="pprofileInput" name="Patient_Id" value="" />
 <input type="hidden" name="Staff_Id" value="<?php echo $_SESSION["Staff_Id"] ?>" />

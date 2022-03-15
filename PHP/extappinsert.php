@@ -15,7 +15,8 @@ if(!empty($_POST["ext_id"])){
 		$addGuestAppointmentResult = mysqli_query($con, $addGuestAppointment);
 
 		if($addGuestAppointmentResult){
-			echo "hey";
+			header("Location: ../index.php?");
+            exit();
 		}
 
 }elseif(isset($_POST["extfirst_name"])){
@@ -47,7 +48,8 @@ if(!empty($_POST["ext_id"])){
 		$addGuestAppointmentResult = mysqli_query($con, $addGuestAppointment);
 
 		if($addGuestAppointmentResult){
-			echo "hey";
+			header("Location: ../index.php?");
+            exit();
 		}
 	}else{
 		echo "failed sql(addguestt)";

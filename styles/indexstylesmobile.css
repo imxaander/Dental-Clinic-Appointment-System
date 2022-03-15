@@ -45,7 +45,7 @@
 
   display:  grid;
   grid-template-columns: repeat(2, 1fr);
-
+  padding-top: 10px;
 margin-left:  10px;
   }
   .topbarmobile{
@@ -191,8 +191,7 @@ margin-left:  10px;
         margin: 0;
     }
     #Home{
-
-        height: 100%;
+      
         background-repeat: no-repeat;
     }
     .no-acc{
@@ -220,36 +219,57 @@ margin-left:  10px;
       background-color: #00b4d8;
       position: relative;
       width: 100%;
-      border-top-left-radius:  25px;
-      border-top-right-radius:  25px;
+      
       padding-top: 5px;
       padding-bottom: 5px;
+      position: sticky;
+    position: -webkit-sticky;
+    top: 0%;
+    z-index: 10;
 
     }
-
+    
+    #insertappslider{
+      padding:10px;
+    }
+    .fc .fc-media-screen .fc-direction-ltr .fc-theme-standard{
+      height: 500px;
+    }
+    #appformheader h3{
+      text-align: center;
+      color: white;
+    }
     #appformheadertext{
     font-size: 40px;
     color: white;
     padding: 0;
     margin: 0;
+    
     }
+    
 
     #appinsert p{
 
     }
     #appinsert{
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+      
         background-color: white;
         z-index: 5;
-        border-radius: 25px;
-        width: 80%;
-        left: 10%;
+        
+        width: 90%;
+        left: 5%;
         position: fixed;
-        top: 10%;
+        top: 5%;
         margin: 0;
         padding: 0;
         overflow-y: auto;
         display: none;
+        height: 90%;
+        background-image: url('https://cdn.discordapp.com/attachments/793749939430621194/932611538529947658/30..png');
+        background-attachment: fixed;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: 50%;
         /*width: 80%;
         position: fixed;
         z-index: 3;
@@ -345,13 +365,14 @@ margin-left:  10px;
         padding: 5px;
         border-radius: 10px;
       }
+
       #message_container{
         width: 90%;
         height: 90%;
         position: fixed;
         left: 5%;
         top: 5%;
-        z-index: 6;
+        z-index: 10;
         background-color: white;
         display: none;
         text-indent: 20px;
@@ -362,7 +383,8 @@ margin-left:  10px;
         height: 80%;
         position: relative;
         background-color: white;
-         overflow-x: hidden;
+        overflow-x: hidden;
+        padding: 10px;
 
       }
       #openmessagesbtn{
@@ -400,6 +422,7 @@ margin-left:  10px;
         position: fixed;
         height: 10%;
         bottom: 20%;
+        z-index: 3;
         right: 5%;
       }
 
@@ -409,7 +432,7 @@ margin-left:  10px;
         color: white;
       }
       #message_content{
-        width: 85%;
+        width: 70%;
         height: 40px;
         margin: 0px;
       }
@@ -433,31 +456,53 @@ margin-left:  10px;
         background-color: #00b4d8;
       }
       .Patient_Message{
-        max-width: 50%;
+
         background-color:	#00b4d8 ;
         color: white;
         border-radius: 25px;
-        margin-left: 20%;
+        width: 60%;
+		    margin-left: 40%;
       }
       .Patient_Message p{
-        margin: 0;
-        padding: 3px;
-        text-indent: 20px;
-        white-space: normal;
+
+        text-indent: 0;
+
+white-space: normal;
+
       }
       .Staff_Message{
 
         background-color:	#E5E4E2 ;
         color: black;
         border-radius: 25px;
+		width: 60%;
 
       }
       .Staff_Message p{
-        margin: 0;
-        padding: 3px;
-        text-indent: 20px;
-        white-space: normal;
+        text-indent: 0;
+text-align: justify;
+white-space: normal;
       }
+	  .message-content-name{
+      padding-top: 10px;
+      padding-left: 10px;
+      margin:0;
+      margin-bottom: 2px;
+      font-weight: bold;
+	  }
+	  .message-content-body{
+      margin-left: 10px;
+      margin-right: 10px;
+      padding:0px;
+      overflow-wrap: break-word;
+      margin-bottom: 2px;
+	  }
+	  .message-content-timestamp{
+      padding-bottom: 10px;
+      padding-left: 10px;
+      margin:0;
+      font-weight: bold;
+	  }
     #notification-container {
         width: 100%;
         margin: 0 auto;
@@ -480,17 +525,28 @@ margin-left:  10px;
         float: right;
     }
     .awards {
-
+      background-color: white;
     }
     .feedbacks {
+      position: relative;
+      width: 90%;
         padding: 5px;
         border-style: solid;
         border-radius: 20px;
-        display: inline-block;
+        display: block;
+        left:5%;
+        margin-bottom: 5px;
     }
     .feedbacks img {
-        width: 100px;
+        width: 30%;
+        position: relative;
+        left:35%;
         border-radius: 50%;
+        
+        
+    }
+    .feedbacks p{
+      text-align: center;
     }
 
     .feedback-content {
@@ -499,13 +555,13 @@ margin-left:  10px;
         margin: 10px;
     }
     .award-img {
-      width: 20%;
-      display: inline-block;
+      width: 100%;
       padding: 20px;
       -moz-user-select: none;
       -webkit-user-select: none;
       user-select: none;
   }
+  
   #award-list {
       position: relative;
       width: 80%;
@@ -514,25 +570,22 @@ margin-left:  10px;
       white-space: nowrap;
       cursor: grab;
   }
-  #award-view {
+  .imgViews {
       position: fixed;
-      top: 0;
-      width:50%;
-      left: 25%;
-      max-height: 90%;
-      top: 5%;
-      z-index: 4;
-      margin-left: auto;
-      margin-right: auto;
-      display: none;
+width: 90%;
+z-index: 20;
+top: 50%;
+left: 50%;
+
+display: none;
+transform: translate(-50%, -50%);
   }
   .branchLocations{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    
     width: 90%;
     position: relative;
     left: 5%;
-    border-style: solid;
+   
     column-gap: 20px;
     padding:20px;
   }
@@ -544,23 +597,23 @@ margin-left:  10px;
   width: 100%;
   }
   .branchLocations div{
-    border-style: solid;
+    margin-bottom: 10px;
+    text-align: center;
   }
   #pqueBranchInfo{
-    border-color: #00b4d8;
+    
 
   }
   #pqueBranchInfo div{
-    border-color: #00b4d8;
-    margin:0px;
-    padding:0px;
+    
+    
   }
   #cupangBranchInfo{
-    border-color: white;
+    
 
   }
   #cupangBranchInfo div{
-    border-color: white;
+    
     padding-left: -10px;
 
   }
@@ -576,5 +629,71 @@ margin-left:  10px;
     padding: 10px;
     background-color: rgb(255 255 255 / 0.44)
 }
+#info-container p{
+  line-height: 20px;
+}
+.branch-infos{
+  padding-bottom: 30px;
+}
+#gallery-parent{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 98%;
+    position: relative;
+    left: 3%;
+}
+.appointment-info{
+  padding: 10px;
+}
+.insert-slides-btn{
+  border-radius: 5px;
+  border-style: none;
+  background-color: #00b4d8;
+  color: white;
+  display: inline;
+  padding: 5px;
+}
+.right-btns{
+  float: right;
+}
+.fc .fc-bg-event, .fc .fc-highlight, .fc .fc-non-business, .fc .fc-view-harness-active>.fc-view{
+  height: 100%;
+}
+.fc .fc-toolbar-title{
+  font-size: 20px;
+  color: black;
+}
+
+.fc .fc-toolbar.fc-header-toolbar :nth-child(3){
+  display: inherit;
+}
+#opennotifpc{
+  display: none;
+  
+}
+.jgLoading{
+  position: relative;          /* where the next element will be automatically positioned */
+    display: inline-block;       /* causes element width to shrink to fit content */
+    left: 50%;                   /* moves left side of image/element to center of parent element */
+    transform: translate(-50%);
+}
+.msg-txta{
+ width: 100%;
+}
+.image_messages{
+  max-width: 80%;
+  margin-left: 10%;
+  cursor: pointer;
+  margin-top: 5;
+  margin-bottom: 5;
+}
+#imagesendlabel{
+  font-size: 30;
+  color: white;
+  cursor: pointer;
+  margin-bottom: -100;
+}
 
 }
+
+

@@ -33,6 +33,25 @@ if (confirm) {
 
 }
 });
+
+//alert to an appointment
+$(document).on('click','a[data-role="alert"]',function() {
+  var Appointment_Id = $(this).data('id');
+  var confirm = window.confirm("Alert this appointment?")
+if (confirm) {
+    $.ajax({
+        url : './PHP/alert.php',
+        method : 'post',
+        data : {Appointment_Id : Appointment_Id },
+        success: function (result){
+          fetchappointments();
+          fetchbranchappointments();
+          
+        }
+    });
+
+}
+});
   //delete appointment
 $(document).on('click','a[data-role="delete"]',function() {
   var Appointment_Id = $(this).data('id');
@@ -95,6 +114,7 @@ $('#send_message_btn').click(function(){
   var author_id = $('#author_id').val();
   var message_id = $('#message_id').val();
 var display_name = $('#display_name').val();
+
   if ($.trim(message_content) != '') {
     $.ajax({
       url: "./PHP/sendmessage.php",
@@ -106,6 +126,16 @@ var display_name = $('#display_name').val();
     });
   }
 });
+
+//send images
+$('#send_image_form').on('change', ()=>{
+  $('#send_image_form').ajaxForm(function() { 
+    console.log("image snet");
+}); 
+  $('#send_image_form').submit();
+  $("#message_history").scrollTop($("#message_history")[0].scrollHeight);
+});
+
 
 $('#message_content').keypress(function(event){
   console.log("message sent.")
@@ -134,6 +164,7 @@ $('#message_content').keypress(function(event){
 $(document).on('click','i[data-role="send_message"]',function() {
   var chat_id = $(this).data('id');
   $('#chat_id').val(chat_id);
+  $('#chat_ids').val(chat_id);
 
   openmessages();
   $("#message_history").scrollTop($("#message_history")[0].scrollHeight);
@@ -184,8 +215,20 @@ $(document).on('click','div[data-role="loadinfo"]',function() {
 
 //kload informations for patient
 $(document).on('click','div[data-role="loadinfopatient"]',function() {
-  var Appointment_Id = $(this).data('id');
+  if($('.appointment-info')[0]){
+    $('.appointment-info')[0].innerHTML = '<img src="img/jgSpinner.svg"  class="jgLoading" alt="">';
+  }else{
+  $('.appinfo')[0].innerHTML = '<img src="img/jgSpinner.svg"  class="jgLoading" alt="">';
+
+  }
+
+  console.log(document.body.clientHeight)
+    var Appointment_Id = $(this).data('id');
   $('.appointment-info').load("./PHP/fetchappointmentinfopatient.php", {Appointment_Id: Appointment_Id}).fadeIn("slow");
+  setTimeout(()=>{
+    window.scrollTo(0,1000);
+  }, 200)
+
 });
 
 //kload informations for patient
@@ -221,6 +264,14 @@ $(document).on('click', 'button[data-role="dltstacc"]', function () {
             }
         });
 });
+
+//seek for patient's information
+$(document).on('click', 'i[data-role="viewProfileP"]', function () {
+  console.log($(this).data('id'));
+  window.open(`../profile.php?patientId=${$(this).data('id')}`, 'popup', 'width=400,height=400');
+});
+
+
     //onchange service, should output something.
     $('#svcs').on('change', function () {
         document.getElementById('timedateinput').style.display = "block";
@@ -282,7 +333,7 @@ $(document).on('click', 'button[data-role="dltstacc"]', function () {
     };
 
     //add time choices.
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 8; i++) {
         let tym = 60 * i;
         let baseTym = 7240000;
         let lastTym = new Date(baseTym + (tym * 60000));
@@ -320,24 +371,25 @@ $(document).on('click', 'button[data-role="dltstacc"]', function () {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
 
-        initialView: 'dayGridWeek',
+        initialView: 'listWeek',
         events: `PHP/fetchevents.php?Branch=${userBranch}`,
-
+        displayEventTime:true,
+        displayEventEnd: true,
         eventMaxStack: 3,
-
+        eventTimeFormat:{
+          hour: 'numeric',
+          minute: '2-digit',
+          meridiem: 'short'
+        },
+        displayEventEnd: false,
         dayPopoverFormat: {
           month: 'long',
           day: 'numeric',
           year: 'numeric'
         },
         themeSystem: 'Lux',
-        dateClick: function(info) {
-          alert('Clicked on: ' + info.dateStr);
-          alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-          alert('Current view: ' + info.view.type);
-          // change the day's background color just for fun
-          info.dayEl.style.backgroundColor = 'red';
-        }
+
+
     });
 
     //render it
@@ -348,10 +400,18 @@ $(document).on('click', 'button[data-role="dltstacc"]', function () {
     //little calendar
     var calendar2Element = document.getElementById("calendar2");
     var calendar2 = new FullCalendar.Calendar(calendar2Element, {
-        initialView: 'dayGridWeek',
+      initialView: 'listWeek',
         events: `PHP/fetchevents.php?Branch=${userBranch}`,
         dayMaxEvents: true,
-
+        displayEventTime:true,
+        displayEventEnd: true,
+        eventTimeFormat:{
+          hour: 'numeric',
+          minute: '2-digit',
+          meridiem: 'short'
+        },
+        displayEventEnd: false,
+        titleFormat: { year: 'numeric', month: 'short', day: 'numeric' }
     });
 
     //render it
@@ -389,9 +449,12 @@ $(document).on('click', 'button[data-role="dltstacc"]', function () {
     $('#opencalendarbtn').on('click', ()=>{
       document.getElementById("darken").style.display = "block";
       document.getElementById('calendar').style.display = 'block';
+      document.getElementById('Notifications').style.display = "none";
       calendar.render();
       calendar.updateSize();
     })
+
+
 
 
 
@@ -465,3 +528,32 @@ function awardOpen(image) {
   imageDom.style.width = "100px";
   */
 }
+function awardOpen(image) {
+  let awardView = document.getElementById('award-view');
+  let darkend = document.getElementById("darken");
+  console.log(image.src);
+  awardView.src = image.src;
+  awardView.style.display = 'block';
+  darkend.style.display = 'block';
+  /*
+  let imageId = image.id;
+  let imageDom = document.getElementById(imageId);
+  imageDom.style.position = "fixed";
+  imageDom.style.width = "100px";
+  */
+}
+function imgOpen(image) {
+  let awardView = document.getElementById('img-view');
+  let darkend = document.getElementById("darken");
+  console.log(image.src);
+  awardView.src = image.src;
+  awardView.style.display = 'block';
+  darkend.style.display = 'block';
+  /*
+  let imageId = image.id;
+  let imageDom = document.getElementById(imageId);
+  imageDom.style.position = "fixed";
+  imageDom.style.width = "100px";
+  */
+}
+

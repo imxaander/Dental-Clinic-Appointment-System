@@ -84,7 +84,13 @@ function openCity(evt, cityName) {
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     if (cityName == 'Home') {
-document.getElementById(cityName).style.display = "grid";
+      if ($(window).width() < 740) {
+        document.getElementById(cityName).style.display = "block";
+    
+    }else{
+      document.getElementById(cityName).style.display = "grid";
+    }
+
 }else if(cityName == 'Services'){
   document.getElementById(cityName).style.display = "grid";
 }else{
@@ -93,7 +99,14 @@ document.getElementById(cityName).style.display = "grid";
 
 
     evt.currentTarget.className += " active";
-    document.getElementById('Page_Section').innerHTML = String(cityName);
+    if(cityName == 'Contact_Us'){
+      document.getElementById('Page_Section').innerHTML = 'About Us';
+    }else if(cityName == 'Gallery'){
+      document.getElementById('Page_Section').innerHTML = 'Photos';
+    }else{
+      document.getElementById('Page_Section').innerHTML = String(cityName);
+    }
+    
 
 
 }
@@ -146,6 +159,7 @@ function closeappinsert(){
 function openmessages(){
   document.getElementById('message_container').style.display = "block";
   document.getElementById('darken').style.display = "block";
+  document.getElementById("Notifications").style.display = "none";
   $("#message_history").scrollTop($("#message_history")[0].scrollHeight);
 }
 function closemessages(){
@@ -200,5 +214,14 @@ function clearFilters(){
   document.querySelector('.filterinputs').value = '';
   document.querySelector('.datefilter').value = '';
   document.querySelector('.timefilter').value = '';
+  let e = new Event("change");
+  let element = document.querySelector('#filterinputt')
+  element.dispatchEvent(e);
   console.log("Filters Cleared.")
+}
+
+function closeItself(el){
+  let tc = el;
+  el.style.display = 'none';
+
 }

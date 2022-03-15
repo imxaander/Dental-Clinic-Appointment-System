@@ -25,7 +25,11 @@ if (isset(($_POST["Patient_Id"]))) {
       }
       elseif ($row["Status"] == "Done")
       {
-          echo '<span style="color: Green">' . $row["Status"] . "</span>";
+          echo '<span style="color: #32CD32">' . $row["Status"] . "</span>";
+      }
+      elseif ($row["Status"] == "Alert")
+      {
+          echo '<span style="color: Orange">' . $row["Status"] . "</span>";
       }
       else
       {

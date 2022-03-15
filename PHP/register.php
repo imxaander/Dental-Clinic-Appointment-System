@@ -32,8 +32,8 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
     $imageFileName = $_FILES["Image"]["name"];
     $imageTempName = $_FILES["Image"]["tmp_name"];
     $folder = "../img/patients/".$imageFileName;
-    
-    
+
+
 
     if (empty($Email))
     {
@@ -132,7 +132,7 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
             if ($result)
             {
                 move_uploaded_file($imageTempName, $folder);
-                
+
                 $url = "http://" . $_SERVER['SERVER_NAME'] . "/PHP/verify.php?vcode=" . $vcode;
 
                 $subject = 'Verify your account for J. Gonzales Clinic';
@@ -232,7 +232,7 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
             }
             else
             {
-                
+
                 header("Location: ../login_page.php?error=Unknown error occured, please try again. 001");
                 exit();
 
@@ -241,10 +241,10 @@ if (isset($_POST['Patient_Id']) && isset($_POST['Password']) && isset($_POST['Fi
     }
 }
 else
-{   
-    
+{
+
     header("Location: ../login_page.php?error=Error Occured, Please try again.".$_FILES);
-    
+
     exit();
 }
 

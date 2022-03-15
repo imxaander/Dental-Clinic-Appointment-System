@@ -28,7 +28,7 @@ if (isset($_POST["Appointment_Id"])) {
           <hr>
           <p>Status : </p>
           <a data-role="cancel"  data-id="<?php echo $row["Appointment_Id"]; ?>" class="Status_Btn" style="background-color: Red;">Cancel</a>, <a data-role="ongoing" class="Status_Btn" data-id="<?php echo $row["Appointment_Id"]; ?>" class="Status_Btn" style="background-color: Blue;">Ongoing</a>,
-          <a data-role="done" data-id="<?php echo $row["Appointment_Id"]; ?>" class="Status_Btn" style="background-color: Green;">Done</a>   <br><br>
+          <a data-role="done" data-id="<?php echo $row["Appointment_Id"]; ?>" class="Status_Btn" style="background-color: Green;">Done</a>, <a data-role="alert" data-id="<?php echo $row["Appointment_Id"]; ?>" class="Status_Btn" style="background-color: Orange;">Alert</a>   <br><br>
           <hr>
           <p>Other options : </p>
           <a data-role="delete"  data-id="<?php echo $row["Appointment_Id"]; ?>" class="Status_Btn" style="background-color: Red;">Delete</a>,

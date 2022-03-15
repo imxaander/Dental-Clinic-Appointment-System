@@ -52,7 +52,9 @@
 
 	<p class="subheader-text jgPara1">Password: </p> <input type="password" name="Password" placeholder="Password..." class="input-boxes" required="true">
 	<br><br>
-	<a class="switches subheader-text" data-role="switchForms" data-id="login"><u>Create an account.</u></a>
+	<a class="switches subheader-text" data-role="switchForms" data-id="login"><u>Create an account.</u></a><br><br>
+	<a class="switches subheader-text" href="forgotpass.php"><u>Forgot Password ?</u></a>
+	<br><br>
 	<input type="submit" id="login-btn" class="submits subheader-text" value="Login">
 	</div>
 	<br><br>

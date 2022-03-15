@@ -1,5 +1,6 @@
 
 /* big screen */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Space+Grotesk:wght@500&display=swap');
 body {
     margin: 0;
@@ -131,27 +132,13 @@ body {
     padding-left: 10px;
 }
 
-#register-form {
-    display: none;
-    height: 80%;
-    scroll-behavior: smooth;
-    margin: 0 auto;
-    width: 80%;
-    grid-template-areas:
-        'email email password password'
-        'firstname middlename lastname lastname'
-        'gender age address address'
-        'occupation branch branch  contactno'
-        'birthdate civilstatus civilstatus image'
-        'submitbtn submitbtn submitbtn submitbtn';
-    scrollbar-width: none;
-}
+
 .switches{
     color: white;
     cursor: pointer;
 }
 .submits{
-    float: right;
+    
 }
 .error{
     color: red;
@@ -174,25 +161,37 @@ body {
     border: none;
     border-radius: 25px;
     padding: 10px;
-    margin-top: -10px;
     color: #00b4d8;
     background-color: white;
     cursor: pointer;
 }
-
+@media only screen and (min-width: 700px){
+    #register-form {
+        display: none;
+        height: 80%;
+        scroll-behavior: smooth;
+        margin: 0 auto;
+        width: 80%;
+        grid-template-areas:
+            'email email password password'
+            'firstname middlename lastname lastname'
+            'gender age address address'
+            'occupation branch branch  contactno'
+            'birthdate civilstatus civilstatus image'
+            'submitbtn submitbtn submitbtn submitbtn';
+        scrollbar-width: none;
+    }
+}
 @media all and (max-width: 699px) {
     #register-form{
-        width: 100%;
-        grid-template-areas:
-        'email password'
-        'firstname middlename'
-        'lastname age'
-        'address birthdate'
-        'gender occupation'
-        'branch civilstatus '
-        'contactno image '
-        'submitbtn submitbtn'
-    ;
+        padding: 5%;
+        width: 90%;
+        display: none;
+        height: 80%;
+        scroll-behavior: smooth;
+        margin: 0 auto;
+        scrollbar-width: none;
+        grid-template-columns: repeat(2, 1fr);
     }
     #bigpicture{
         display: none;
@@ -202,5 +201,8 @@ body {
     }
     #main-form{
         width: 100%;
+    }
+    #register-form div{
+        display: contents;
     }
 }

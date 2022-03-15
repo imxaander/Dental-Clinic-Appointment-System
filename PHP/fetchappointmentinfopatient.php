@@ -10,19 +10,16 @@ if (isset($_POST["Appointment_Id"])) {
     $row = mysqli_fetch_array($result); ?>
 
  <br> </button>
-
+          <p class="jgTitles2" style="text-align: center">Appointment Details</p>
           <div class="" id="<?php echo $row["Appointment_Id"]; ?>">
           <p>Service :  <?php echo $row["Service"]; ?> </p>
-
           <p>Branch : <?php echo $row["Branch"] ?></p>
           <p>Patient Note :  <?php echo $row["Message"]; ?> </p>
-          <p>Appointment Code :  <?php echo $row["Appointment_Id"]; ?> </p>
-    
           <hr>
           <p>Cancel?</p>
           <a data-role="cancel"  data-id="<?php echo $row["Appointment_Id"]; ?>" class="Status_Btn" style="background-color: Red;">Cancel</a><br>
           <hr>
-          <p>Other options : </p>
+          
 
 <br><br>
 

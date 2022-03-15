@@ -25,7 +25,7 @@ if(isset($_POST['Email']) && isset($_POST['Password'])){
 	    exit();
 	}else if(empty($Password)){
         header("Location: ../login_page.php?error=Password is required");
-	exit();
+	    exit();
 
     }else{
         #convert password to hash md5 for security
